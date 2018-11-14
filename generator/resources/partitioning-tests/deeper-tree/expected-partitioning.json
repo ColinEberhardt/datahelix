@@ -1,0 +1,367 @@
+[{
+  "description": "DeeperTree[0]",
+  "rootNode": {
+    "atomicConstraints": [{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "UserType"
+      },
+      "legalValues": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "UserType"
+        }
+      }
+    },{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "PostType"
+      },
+      "legalValues": [
+        "PostType1",
+        "PostType2",
+        "PostType3",
+        "PostType4"
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "PostType"
+        }
+      }
+    },{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "Post"
+      },
+      "requiredType": "String"
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "Post"
+        }
+      }
+    },{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "Action"
+      },
+      "legalValues": [
+        "ActionA",
+        "ActionB",
+        "ActionC"
+      ]
+    }],
+    "decisions": [{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "UserType"
+          },
+          "requiredValue": "A"
+        },{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "PostType"
+          },
+          "legalValues": [
+            "PostType1",
+            "PostType4"
+          ]
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "UserType"
+            },
+            "requiredValue": "A"
+          }
+        }]
+      }]
+    },{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "UserType"
+          },
+          "legalValues": [
+            "C",
+            "D"
+          ]
+        },{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "PostType"
+          },
+          "legalValues": [
+            "PostType2",
+            "PostType3"
+          ]
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsInSetConstraint",
+            "field": {
+              "name": "UserType"
+            },
+            "legalValues": [
+              "C",
+              "D"
+            ]
+          }
+        }]
+      }]
+    },{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "PostType"
+          },
+          "requiredValue": "PostType1"
+        },{
+          "type":  "IsStringShorterThanConstraint",
+          "field": {
+            "name": "Post"
+          },
+          "referenceValue": 20
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "PostType"
+            },
+            "requiredValue": "PostType1"
+          }
+        }]
+      }]
+    },{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "UserType"
+          },
+          "requiredValue": "C"
+        }],
+        "decisions": [{
+          "options": [{
+            "atomicConstraints": [{
+              "type": "IsEqualToConstantConstraint",
+              "field": {
+                "name": "PostType"
+              },
+              "requiredValue": "PostType2"
+            },{
+              "type": "IsEqualToConstantConstraint",
+              "field": {
+                "name": "Action"
+              },
+              "requiredValue": "ActionB"
+            }]
+          },{
+            "atomicConstraints": [{
+              "type": "NotConstraint",
+              "negatedConstraint": {
+                "type": "IsEqualToConstantConstraint",
+                "field": {
+                  "name": "PostType"
+                },
+                "requiredValue": "PostType2"
+              }
+            }]
+          }]
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "UserType"
+            },
+            "requiredValue": "C"
+          }
+        }]
+      }]
+    }]
+  },
+  "fields": {
+    "fields": [{
+      "name": "UserType"
+    },{
+      "name": "PostType"
+    },{
+      "name": "Post"
+    },{
+      "name": "Action"
+    }]
+  }
+},{
+  "description": "DeeperTree[1]",
+  "rootNode": {
+    "atomicConstraints": [{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "Topic"
+      },
+      "requiredType": "String"
+    },{
+      "type": "IsStringShorterThanConstraint",
+      "field": {
+        "name": "Topic"
+      },
+      "referenceValue": 30
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "Topic"
+        }
+      }
+    },{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "Event"
+      },
+      "legalValues": [
+        "FirstEvent",
+        "SecondEvent",
+        "ThirdEvent"
+      ]
+    },{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "Duration"
+      },
+      "requiredType": "Numeric"
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "Duration"
+        }
+      }
+    }],
+    "decisions": [{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "Event"
+          },
+          "legalValues": [
+            "FirstEvent",
+            "SecondEvent"
+          ]
+        },{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "Topic"
+          },
+          "legalValues": [
+            "InterestingTopic",
+            "TechnicalTopic"
+          ]
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsInSetConstraint",
+            "field": {
+              "name": "Event"
+            },
+            "legalValues": [
+              "FirstEvent",
+              "SecondEvent"
+            ]
+          }
+        }]
+      }]
+    },{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "Event"
+          },
+          "requiredValue": "FirstEvent"
+        }],
+        "decisions": [{
+          "options": [{
+            "atomicConstraints": [{
+              "type": "IsEqualToConstantConstraint",
+              "field": {
+                "name": "Topic"
+              },
+              "requiredValue": "InterestingTopic"
+            },{
+              "type": "IsEqualToConstantConstraint",
+              "field": {
+                "name": "Duration"
+              },
+              "requiredValue": 60
+            }]
+          },{
+            "atomicConstraints": [{
+              "type": "NotConstraint",
+              "negatedConstraint": {
+                "type": "IsEqualToConstantConstraint",
+                "field": {
+                  "name": "Topic"
+                },
+                "requiredValue": "InterestingTopic"
+              }
+            }]
+          }]
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "Event"
+            },
+            "requiredValue": "FirstEvent"
+          }
+        }]
+      }]
+    }]
+  },
+  "fields": {
+    "fields": [{
+      "name": "Event"
+    },{
+      "name": "Topic"
+    },{
+      "name": "Duration"
+    }]
+  }
+}]
