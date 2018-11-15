@@ -1,0 +1,369 @@
+{
+  "schemaVersion": "v3",
+  "description": "Testing a profile that should split into 10 different trees",
+  "fields": [
+    "FirstA",
+    "FirstB",
+    "SecondA",
+    "SecondB",
+    "ThirdA",
+    "ThirdB",
+    "FourthA",
+    "FourthB",
+    "FifthA",
+    "FifthB",
+    "SixthA",
+    "SixthB",
+    "SeventhA",
+    "SeventhB",
+    "EighthA",
+    "EighthB",
+    "NinethA",
+    "NinethB",
+    "TenthA",
+    "TenthB"
+  ],
+  "rules": [{
+    "rule": "FirstA",
+    "constraints": [{
+      "field": "FirstA",
+      "is": "ofType",
+      "value": "string"
+    }]
+  },{
+    "rule": "FirstB",
+    "constraints": [{
+      "field": "FirstB",
+      "is": "inSet",
+      "values": [
+        "A",
+        "B",
+        "C"
+      ]
+    },{
+      "not": {
+        "field": "FirstB",
+        "is": "null"
+      }
+    },{
+      "if": {
+        "field": "FirstA",
+        "is": "null"
+      },
+      "then": {
+        "field": "FirstB",
+        "is": "equalTo",
+        "value": "A"
+      }
+    }]
+  },{
+    "rule": "SecondA",
+    "constraints": [{
+      "field": "SecondA",
+      "is": "ofType",
+      "value": "numeric"
+    },{
+      "field": "SecondA",
+      "is": "greaterThan",
+      "value": 10
+    },{
+      "if": {
+        "field": "SecondB",
+        "is": "inSet",
+        "values": [
+          "Test1",
+          "Test2"
+        ]
+      },
+      "then": {
+        "field": "SecondA",
+        "is": "equalTo",
+        "value": "20"
+      }
+    }]
+  },{
+    "rule": "SecondB",
+    "constraints": [{
+      "field": "SecondB",
+      "is": "inSet",
+      "values": [
+        "Test1",
+        "Test2",
+        "Test3"
+      ]
+    }]
+  },{
+    "rule": "ThirdA",
+    "constraints": [{
+      "field": "ThirdA",
+      "is": "inSet",
+      "values": [
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ]
+    }]
+  },{
+    "rule": "ThirdB",
+    "constraints": [{
+      "field": "ThirdB",
+      "is": "ofType",
+      "value": "numeric"
+    },{
+      "not": {
+        "field": "ThirdB",
+        "is": "null"
+      }
+    },{
+      "if": {
+        "field": "ThirdA",
+        "is": "inSet",
+        "values": [
+          "A2",
+          "A3"
+        ]
+      },
+      "then": {
+        "field": "ThirdB",
+        "is": "inSet",
+        "values": [
+          10,
+          25,
+          30,
+          40
+        ]
+      }
+    }]
+  },{
+    "rule": "FourthA",
+    "constraints": [{
+      "field": "FourthA",
+      "is": "ofType",
+      "value": "string"
+    }]
+  },{
+    "rule": "FourthB",
+    "constraints": [{
+      "field": "FourthB",
+      "is": "ofType",
+      "value": "numeric"
+    },{
+      "not": {
+        "field": "FourthB",
+        "is": "null"
+      }
+    },{
+      "if": {
+        "field": "FourthA",
+        "is": "null"
+      },
+      "then": {
+        "field": "FourthB",
+        "is": "equalTo",
+        "value": "50"
+      }
+    }]
+  },{
+    "rule": "FifthA",
+    "constraints": [{
+      "field": "FifthA",
+      "is": "inSet",
+      "values": [
+        "Daisy",
+        "Poppy",
+        "Tulip"
+      ]
+    },{
+      "not": {
+        "field": "FifthA",
+        "is": "null"
+      }
+    }]
+  },{
+    "rule": "FifthB",
+    "constraints": [{
+      "field": "FifthB",
+      "is": "inSet",
+      "values": [
+        "Can",
+        "Bottle"
+      ]
+    },{
+      "not": {
+        "field": "FifthB",
+        "is": "null"
+      }
+    },{
+      "if": {
+        "field": "FifthA",
+        "is": "inSet",
+        "values": [
+          "Poppy",
+          "Tulip"
+        ]
+      },
+      "then": {
+        "field": "FifthB",
+        "is": "equalTo",
+        "value": "Bottle"
+      }
+    }]
+  },{
+    "rule": "SixthA",
+    "constraints": [{
+      "field": "SixthA",
+      "is": "ofType",
+      "value": "string"
+    }]
+  },{
+    "rule": "SixthB",
+    "constraints": [{
+      "field": "SixthB",
+      "is": "ofType",
+      "value": "numeric"
+    },{
+      "if": {
+        "field": "SixthA",
+        "is": "null"
+      },
+      "then": {
+        "field": "SixthB",
+        "is": "equalTo",
+        "value": "15"
+      }
+    }]
+  },{
+    "rule": "SeventhA",
+    "constraints": [{
+      "field": "SeventhA",
+      "is": "inSet",
+      "values": [
+        "Spoon",
+        "Fork",
+        "Knife"
+      ]
+    }]
+  },{
+    "rule": "SeventhB",
+    "constraints": [{
+      "field": "SeventhB",
+      "is": "ofType",
+      "value": "string"
+    },{
+      "field": "SeventhB",
+      "is": "shorterThan",
+      "value": 100
+    },{
+      "if": {
+        "field": "SeventhA",
+        "is": "inSet",
+        "values": [
+          "Spoon",
+          "Fork"
+        ]
+      },
+      "then": {
+        "field": "SeventhB",
+        "is": "shorterThan",
+        "value": 50
+      }
+    }]
+  },{
+    "rule": "EighthA",
+    "constraints": [{
+      "field": "EighthA",
+      "is": "inSet",
+      "values": [
+        "B1",
+        "B2",
+        "B3"
+      ]
+    }]
+  },{
+    "rule": "EighthB",
+    "constraints": [{
+      "field": "EighthB",
+      "is": "ofType",
+      "value": "numeric"
+    },{
+      "if": {
+        "field": "EighthA",
+        "is": "inSet",
+        "values": [
+          "B1",
+          "B3"
+        ]
+      },
+      "then": {
+        "field": "EighthB",
+        "is": "equalTo",
+        "value": "350"
+      }
+    }]
+  },{
+    "rule": "NinethA",
+    "constraints": [{
+      "field": "NinethA",
+      "is": "inSet",
+      "values": [
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ]
+    },{
+      "if":  {
+        "field": "NinethB",
+        "is": "null"
+      },
+      "then": {
+        "field": "NinethA",
+        "is": "equalTo",
+        "value": "C4"
+      }
+    }]
+  },{
+    "rule": "NinethB",
+    "constraints": [{
+      "field": "NinethB",
+      "is": "ofType",
+      "value": "numeric"
+    }]
+  },{
+    "rule": "TenthA",
+    "constraints": [{
+      "field": "TenthA",
+      "is": "ofType",
+      "value": "numeric"
+    }]
+  },{
+    "rule": "TenthB",
+    "constraints": [{
+      "field": "TenthB",
+      "is": "ofType",
+      "value": "string"
+    },{
+      "not": {
+        "field": "TenthB",
+        "is": "null"
+      }
+    },{
+      "if": {
+        "not": {
+          "field": "TenthA",
+          "is": "null"
+        }
+      },
+      "then": {
+        "field": "TenthB",
+        "is": "inSet",
+        "values": [
+          "Ten",
+          "Eleven",
+          "Twelve"
+        ]
+      }
+    }]
+  }]
+}

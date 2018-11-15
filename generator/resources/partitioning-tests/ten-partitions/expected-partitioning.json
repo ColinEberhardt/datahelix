@@ -1,0 +1,643 @@
+[{
+  "description": "TenPartitions[0]",
+  "rootNode": {
+    "atomicConstraints": [{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "FirstA"
+      },
+      "requiredType": "String"
+    },{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "FirstB"
+      },
+      "legalValues": [
+        "A",
+        "B",
+        "C"
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "FirstB"
+        }
+      }
+    }],
+    "decisions": [{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsNullConstraint",
+          "field": {
+            "name": "FirstA"
+          }
+        },{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "FirstB"
+          },
+          "requiredValue": "A"
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsNullConstraint",
+            "field": {
+              "name": "FirstA"
+            }
+          }
+        }]
+      }]
+    }]
+  },
+  "fields": {
+    "fields": [{
+      "name":  "FirstA"
+    },{
+      "name": "FirstB"
+    }]
+  }
+},{
+  "description": "TenPartitions[1]",
+  "rootNode": {
+    "atomicConstraints": [{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "SecondA"
+      },
+      "requiredType": "Numeric"
+    },{
+      "type": "IsGreaterThanConstantConstraint",
+      "field": {
+        "name": "SecondA"
+      },
+      "referenceValue": 10
+    },{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "SecondB"
+      },
+      "legalValues": [
+        "Test1",
+        "Test2",
+        "Test3"
+      ]
+    }],
+    "decisions": [{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "SecondB"
+          },
+          "legalValues": [
+            "Test1",
+            "Test2"
+          ]
+        },{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "SecondA"
+          },
+          "requiredValue": 20
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsInSetConstraint",
+            "field": {
+              "name": "SecondB"
+            },
+            "legalValues": [
+              "Test1",
+              "Test2"
+            ]
+          }
+        }]
+      }]
+    }]
+  },
+  "fields": {
+    "fields": [{
+      "name": "SecondA"
+    },{
+      "name": "SecondB"
+    }]
+  }
+},{
+  "description": "TenPartitions[2]",
+  "rootNode": {
+    "atomicConstraints": [{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "ThirdA"
+      },
+      "legalValues": [
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ]
+    },{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "ThirdB"
+      },
+      "requiredType": "Numeric"
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "ThirdB"
+        }
+      }
+    }],
+    "decisions": [{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "ThirdA"
+          },
+          "legalValues": [
+            "A2",
+            "A3"
+          ]
+        },{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "ThirdB"
+          },
+          "legalValues": [
+            10,
+            25,
+            30,
+            40
+          ]
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsInSetConstraint",
+            "field": {
+              "name": "ThirdA"
+            },
+            "legalValues": [
+              "A2",
+              "A3"
+            ]
+          }
+        }]
+      }]
+    }]
+  },
+  "fields": {
+    "fields": [{
+      "name": "ThirdA"
+    },{
+      "name": "ThirdB"
+    }]
+  }
+},{
+  "description": "TenPartitions[3]",
+  "rootNode": {
+    "atomicConstraints": [{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "FourthA"
+      },
+      "requiredType": "String"
+    },{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "FourthB"
+      },
+      "requiredType": "Numeric"
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "FourthB"
+        }
+      }
+    }],
+    "decisions": [{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsNullConstraint",
+          "field": {
+            "name": "FourthA"
+          }
+        },{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "FourthB"
+          },
+          "requiredValue": 50
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsNullConstraint",
+            "field": {
+              "name": "FourthA"
+            }
+          }
+        }]
+      }]
+    }]
+  },
+  "fields": {
+    "fields": [{
+      "name": "FourthA"
+    },{
+      "name": "FourthB"
+    }]
+  }
+},{
+  "description": "TenPartitions[4]",
+  "rootNode": {
+    "atomicConstraints": [{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "FifthA"
+      },
+      "legalValues": [
+        "Poppy",
+        "Daisy",
+        "Tulip"
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "FifthA"
+        }
+      }
+    },{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "FifthB"
+      },
+      "legalValues": [
+        "Can",
+        "Bottle"
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "FifthB"
+        }
+      }
+    }],
+    "decisions": [{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "FifthA"
+          },
+          "legalValues": [
+            "Poppy",
+            "Tulip"
+          ]
+        },{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "FifthB"
+          },
+          "requiredValue": "Bottle"
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsInSetConstraint",
+            "field": {
+              "name": "FifthA"
+            },
+            "legalValues": [
+              "Poppy",
+              "Tulip"
+            ]
+          }
+        }]
+      }]
+    }]
+  },
+  "fields": {
+    "fields": [{
+      "name": "FifthA"
+    },{
+      "name": "FifthB"
+    }]
+  }
+},{
+  "description": "TenPartitions[5]",
+  "rootNode": {
+    "atomicConstraints": [{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "SixthA"
+      },
+      "requiredType": "String"
+    },{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "SixthB"
+      },
+      "requiredType": "Numeric"
+    }],
+    "decisions": [{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsNullConstraint",
+          "field": {
+            "name": "SixthA"
+          }
+        },{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "SixthB"
+          },
+          "requiredValue": 15
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsNullConstraint",
+            "field": {
+              "name": "SixthA"
+            }
+          }
+        }]
+      }]
+    }]
+  },
+  "fields": {
+    "fields": [{
+      "name": "SixthA"
+    },{
+      "name": "SixthB"
+    }]
+  }
+},{
+  "description": "TenPartitions[6]",
+  "rootNode": {
+    "atomicConstraints": [{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "SeventhA"
+      },
+      "legalValues": [
+        "Spoon",
+        "Fork",
+        "Knife"
+      ]
+    },{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "SeventhB"
+      },
+      "requiredType": "String"
+    },{
+      "type": "IsStringShorterThanConstraint",
+      "field": {
+        "name": "SeventhB"
+      },
+      "referenceValue": 100
+    }],
+    "decisions": [{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "SeventhA"
+          },
+          "legalValues": [
+            "Fork",
+            "Spoon"
+          ]
+        },{
+          "type": "IsStringShorterThanConstraint",
+          "field": {
+            "name": "SeventhB"
+          },
+          "referenceValue": 50
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsInSetConstraint",
+            "field": {
+              "name": "SeventhA"
+            },
+            "legalValues": [
+              "Fork",
+              "Spoon"
+            ]
+          }
+        }]
+      }]
+    }]
+  },
+  "fields": {
+    "fields": [{
+      "name": "SeventhA"
+    },{
+      "name": "SeventhB"
+    }]
+  }
+},{
+  "description": "TenParitions[7]",
+  "rootNode": {
+    "atomicConstraints": [{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "EighthA"
+      },
+      "legalValues": [
+        "B1",
+        "B2",
+        "B3"
+      ]
+    },{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "EighthB"
+      },
+      "requiredType": "Numeric"
+    }],
+    "decisions": [{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "EighthA"
+          },
+          "legalValues": [
+            "B1",
+            "B3"
+          ]
+        },{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "EighthB"
+          },
+          "requiredValue": 350
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsInSetConstraint",
+            "field": {
+              "name": "EighthA"
+            },
+            "legalValues": [
+              "B1",
+              "B3"
+            ]
+          }
+        }]
+      }]
+    }]
+  },
+  "fields": {
+    "fields": [{
+      "name": "EighthA"
+    },{
+      "name": "EighthB"
+    }]
+  }
+},{
+  "description": "TenPartitions[8]",
+  "rootNode": {
+    "atomicConstraints": [{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "NinethA"
+      },
+      "legalValues": [
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ]
+    },{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "NinethB"
+      },
+      "requiredType": "Numeric"
+    }],
+    "decisions": [{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsNullConstraint",
+          "field": {
+            "name": "NinethB"
+          }
+        },{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "NinethA"
+          },
+          "requiredValue": "C4"
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsNullConstraint",
+            "field": {
+              "name": "NinethB"
+            }
+          }
+        }]
+      }]
+    }]
+  },
+  "fields": {
+    "fields": [{
+      "name": "NinethA"
+    },{
+      "name": "NinethB"
+    }]
+  }
+},{
+  "description": "TenPartitions[9]",
+  "rootNode": {
+    "atomicConstraints": [{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "TenthA"
+      },
+      "requiredType": "Numeric"
+    },{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "TenthB"
+      },
+      "requiredType": "String"
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "TenthB"
+        }
+      }
+    }],
+    "decisions": [{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsNullConstraint",
+            "field": {
+              "name": "TenthA"
+            }
+          }
+        },{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "TenthB"
+          },
+          "legalValues": [
+            "Ten",
+            "Eleven",
+            "Twelve"
+          ]
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "IsNullConstraint",
+          "field": {
+            "name": "TenthA"
+          }
+        }]
+      }]
+    }]
+  },
+  "fields": {
+    "fields": [{
+      "name": "TenthA"
+    },{
+      "name": "TenthB"
+    }]
+  }
+}]
