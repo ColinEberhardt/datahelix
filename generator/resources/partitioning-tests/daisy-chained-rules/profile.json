@@ -1,0 +1,211 @@
+{
+  "schemaVersion": "v3",
+  "description": "Testing a profile that contains multiple rule dependencies",
+  "fields": [
+    { "name": "FirstField" },
+    { "name": "SecondField" },
+    { "name": "ThirdField" },
+    { "name": "FourthField" },
+    { "name": "FifthField" },
+    { "name": "SixthField" },
+    { "name": "SeventhField" },
+    { "name": "EighthField" }
+  ],
+  "rules": [{
+    "rule": "FirstField",
+    "constraints": [{
+      "field": "FirstField",
+      "is": "inSet",
+      "values": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ]
+    },{
+      "not": {
+        "field": "FirstField",
+        "is": "null"
+      }
+    },{
+      "if": {
+        "field": "SecondField",
+        "is": "equalTo",
+        "value": "P"
+      },
+      "then": {
+        "field": "FirstField",
+        "is": "inSet",
+        "values": [
+          "A",
+          "B",
+          "C"
+        ]
+      }
+    }]
+  },{
+    "rule": "SecondField",
+    "constraints": [{
+      "field": "SecondField",
+      "is": "ofType",
+      "value": "string"
+    },{
+      "not": {
+        "field": "SecondField",
+        "is": "null"
+      }
+    },{
+      "if": {
+        "field": "ThirdField",
+        "is": "inSet",
+        "values": [
+          1,
+          2,
+          3
+        ]
+      },
+      "then": {
+        "field": "SecondField",
+        "is": "inSet",
+        "values": [
+          "O",
+          "P",
+          "Q"
+        ]
+      }
+    }]
+  },{
+    "rule": "ThirdField",
+    "constraints": [{
+      "field": "ThirdField",
+      "is": "inSet",
+      "values": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },{
+      "not": {
+        "field": "ThirdField",
+        "is": "null"
+      }
+    }]
+  },{
+    "rule": "FourthField",
+    "constraints": [{
+      "field": "FourthField",
+      "is": "ofType",
+      "value": "numeric"
+    },{
+      "if": {
+        "allOf": [{
+          "field": "FifthField",
+          "is": "greaterThan",
+          "value": 20
+        },{
+          "field": "FifthField",
+          "is": "lessThan",
+          "value": 50
+        }]
+      },
+      "then": {
+        "field": "FourthField",
+        "is": "inSet",
+        "values": [
+          5,
+          10,
+          12,
+          15
+        ]
+      }
+    }]
+  },{
+    "rule": "FifthField",
+    "constraints": [{
+      "field": "FifthField",
+      "is": "inSet",
+      "values": [
+        5,
+        10,
+        20,
+        25,
+        35,
+        40,
+        50,
+        60,
+        65,
+        70
+      ]
+    }]
+  },{
+    "rule": "SixthField",
+    "constraints": [{
+      "field": "SixthField",
+      "is": "ofType",
+      "value": "string"
+    },{
+      "not": {
+        "field": "SixthField",
+        "is": "null"
+      }
+    },{
+        "if": {
+        "field": "EighthField",
+        "is": "inSet",
+        "values": [
+          "A1",
+          "A2"
+        ]
+      },
+      "then": {
+        "field": "SixthField",
+        "is": "inSet",
+        "values": [
+          "B1",
+          "B3"
+        ]
+      }
+    }]
+  },{
+    "rule": "SeventhField",
+    "constraints": [{
+      "field": "SeventhField",
+      "is": "ofType",
+      "value": "string"
+    },{
+      "if": {
+        "field": "SixthField",
+        "is": "inSet",
+        "values": [
+          "B1",
+          "B3"
+        ]
+      },
+      "then": {
+        "field": "SeventhField",
+        "is": "equalTo",
+        "value": "Test"
+      }
+    }]
+  },{
+    "rule": "EighthField",
+    "constraints": [{
+      "field": "EighthField",
+      "is": "inSet",
+      "values": [
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ]
+    },{
+      "not": {
+        "field": "EighthField",
+        "is": "null"
+      }
+    }]
+  }]
+}

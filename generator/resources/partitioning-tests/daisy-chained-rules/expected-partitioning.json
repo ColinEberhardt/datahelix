@@ -1,0 +1,348 @@
+[{
+  "description": "DaisyChain[0]",
+  "rootNode": {
+    "atomicConstraints": [{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "FirstField"
+      },
+      "legalValues": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "FirstField"
+        }
+      }
+    },{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "SecondField"
+      },
+      "requiredType": "String"
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "SecondField"
+        }
+      }
+    },{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "ThirdField"
+      },
+      "legalValues": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "ThirdField"
+        }
+      }
+    }],
+    "decisions": [{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "SecondField"
+          },
+          "requiredValue": "P"
+        },{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "FirstField"
+          },
+          "legalValues": [
+            "A",
+            "B",
+            "C"
+          ]
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "SecondField"
+            },
+            "requiredValue": "P"
+          }
+        }]
+      }]
+    },{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "ThirdField"
+          },
+          "legalValues": [
+            1,
+            2,
+            3
+          ]
+        },{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "SecondField"
+          },
+          "legalValues": [
+            "O",
+            "P",
+            "Q"
+          ]
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsInSetConstraint",
+            "field": {
+              "name": "ThirdField"
+            },
+            "legalValues": [
+              1,
+              2,
+              3
+            ]
+          }
+        }]
+      }]
+    }]
+  },
+  "fields": {
+    "fields": [{
+      "name": "FirstField"
+    },{
+      "name": "SecondField"
+    },{
+      "name": "ThirdField"
+    }]
+  }
+},{
+  "description": "DaisyChain[1]",
+  "rootNode": {
+    "atomicConstraints": [{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "FourthField"
+      },
+      "requiredType": "Numeric"
+    },{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "FifthField"
+      },
+      "legalValues": [
+        5,
+        10,
+        20,
+        25,
+        35,
+        40,
+        50,
+        60,
+        65,
+        70
+      ]
+    }],
+    "decisions": [{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsGreaterThanConstantConstraint",
+          "field": {
+            "name": "FifthField"
+          },
+          "referenceValue": 20
+        },{
+          "type": "IsLessThanConstantConstraint",
+          "field": {
+            "name": "FifthField"
+          },
+          "referenceValue": 50
+        },{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "FourthField"
+          },
+          "legalValues": [
+            5,
+            10,
+            12,
+            15
+          ]
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsGreaterThanConstantConstraint",
+            "field": {
+              "name": "FifthField"
+            },
+            "referenceValue": 20
+          }
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsLessThanConstantConstraint",
+            "field": {
+              "name": "FifthField"
+            },
+            "referenceValue": 50
+          }
+        }]
+      }]
+    }]
+  },
+  "fields": {
+    "fields": [{
+      "name": "FourthField"
+    },{
+      "name": "FifthField"
+    }]
+  }
+},{
+  "description": "DaisyChain[2]",
+  "rootNode": {
+    "atomicConstraints": [{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "SixthField"
+      },
+      "requiredType": "String"
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "SixthField"
+        }
+      }
+    },{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "SeventhField"
+      },
+      "requiredType": "String"
+    },{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "EighthField"
+      },
+      "legalValues": [
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "EighthField"
+        }
+      }
+    }],
+    "decisions": [{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "EighthField"
+          },
+          "legalValues": [
+            "A1",
+            "A2"
+          ]
+        },{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "SixthField"
+          },
+          "legalValues": [
+            "B1",
+            "B3"
+          ]
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsInSetConstraint",
+            "field": {
+              "name": "EighthField"
+            },
+            "legalValues": [
+              "A1",
+              "A2"
+            ]
+          }
+        }]
+      }]
+    },{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "SixthField"
+          },
+          "legalValues": [
+            "B1",
+            "B3"
+          ]
+        },{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "SeventhField"
+          },
+          "requiredValue": "Test"
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsInSetConstraint",
+            "field": {
+              "name": "SixthField"
+            },
+            "legalValues": [
+              "B1",
+              "B3"
+            ]
+          }
+        }]
+      }]
+    }]
+  },
+  "fields": {
+    "fields": [{
+      "name": "SixthField"
+    },{
+      "name": "SeventhField"
+    },{
+      "name": "EighthField"
+    }]
+  }
+}]
