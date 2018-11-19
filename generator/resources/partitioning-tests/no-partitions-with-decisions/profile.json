@@ -1,0 +1,142 @@
+{
+  "schemaVersion": "v3",
+  "description": "Tests that a profile that contains decisions that all contain relationships do not produce extra partitions",
+  "fields": [
+    "ProductType",
+    "Price",
+    "Category",
+    "MaximumAmount",
+    "AuditType"
+  ],
+  "rules": [{
+    "rule": "ProductType",
+    "constraints": [{
+      "field": "ProductType",
+      "is": "inSet",
+      "values": [
+        "Type1",
+        "Type2",
+        "Type3"
+      ]
+    },{
+      "not": {
+        "field": "ProductType",
+        "is": "null"
+      }
+    }]
+  },{
+    "rule": "Price",
+    "constraints": [{
+      "field": "Price",
+      "is": "ofType",
+      "value": "numeric"
+    },{
+      "not": {
+        "field": "Price",
+        "is": "null"
+      }
+    },{
+      "if": {
+        "field": "ProductType",
+        "is": "equalTo",
+        "value": "Type1"
+      },
+      "then": {
+        "field": "Price",
+        "is": "lessThan",
+        "value": 100
+      }
+    },{
+      "if": {
+        "field": "Category",
+        "is": "inSet",
+        "values": [
+          "Category2",
+          "Category3"
+        ]
+      },
+      "then": {
+        "field": "Price",
+        "is": "greaterThanOrEqualTo",
+        "value": 25
+      }
+    }]
+  },{
+    "rule": "Category",
+    "constraints": [{
+      "field": "Category",
+      "is": "inSet",
+      "values": [
+        "Category1",
+        "Category2",
+        "Category3"
+      ]
+    },{
+      "not": {
+        "field": "Category",
+        "is": "null"
+      }
+    }]
+  },{
+    "rule": "MaximumAmount",
+    "constraints": [{
+      "field": "MaximumAmount",
+      "is": "ofType",
+      "value": "numeric"
+    },{
+      "not": {
+        "field": "MaximumAmount",
+        "is": "null"
+      }
+    },{
+      "if": {
+        "field": "Category",
+        "is": "equalTo",
+        "value": "Category2"
+      },
+      "then": {
+        "field": "MaximumAmount",
+        "is": "lessThan",
+        "value": 250
+      }
+    }]
+  },{
+    "rule": "AuditType",
+    "constraints": [{
+      "field": "AuditType",
+      "is": "inSet",
+      "values": [
+        "AuditType1",
+        "AuditType2",
+        "AuditType3"
+      ]
+    },{
+      "not": {
+        "field": "AuditType",
+        "is": "null"
+      }
+    },{
+      "if": {
+        "field": "Category",
+        "is": "equalTo",
+        "value": "Category1"
+      },
+      "then": {
+        "field": "AuditType",
+        "is": "equalTo",
+        "value": "AuditType1"
+      }
+    },{
+      "if": {
+        "field": "Category",
+        "is": "equalTo",
+        "value": "Category2"
+      },
+      "then": {
+        "field": "AuditType",
+        "is": "equalTo",
+        "value": "AuditType3"
+      }
+    }]
+  }]
+}

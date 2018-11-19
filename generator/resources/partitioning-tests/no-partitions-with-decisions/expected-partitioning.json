@@ -1,0 +1,243 @@
+[{
+  "description": "NoPartitionWithDecisions[0]",
+  "rootNode": {
+    "atomicConstraints": [{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "ProductType"
+      },
+      "legalValues": [
+        "Type1",
+        "Type2",
+        "Type3"
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "ProductType"
+        }
+      }
+    },{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "Price"
+      },
+      "requiredType": "Numeric"
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "Price"
+        }
+      }
+    },{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "Category"
+      },
+      "legalValues": [
+        "Category1",
+        "Category2",
+        "Category3"
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "Category"
+        }
+      }
+    },{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "MaximumAmount"
+      },
+      "requiredType": "Numeric"
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "MaximumAmount"
+        }
+      }
+    },{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "AuditType"
+      },
+      "legalValues": [
+        "AuditType1",
+        "AuditType2",
+        "AuditType3"
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "AuditType"
+        }
+      }
+    }],
+    "decisions": [{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "ProductType"
+          },
+          "requiredValue": "Type1"
+        },{
+          "type": "IsLessThanConstantConstraint",
+          "field": {
+            "name": "Price"
+          },
+          "referenceValue": 100
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "ProductType"
+            },
+            "requiredValue": "Type1"
+          }
+        }]
+      }]
+    },{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "Category"
+          },
+          "legalValues": [
+            "Category2",
+            "Category3"
+          ]
+        },{
+          "type": "IsGreaterThanOrEqualToConstantConstraint",
+          "field": {
+            "name": "Price"
+          },
+          "referenceValue": 25
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsInSetConstraint",
+            "field": {
+              "name": "Category"
+            },
+            "legalValues": [
+              "Category2",
+              "Category3"
+            ]
+          }
+        }]
+      }]
+    },{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "Category"
+          },
+          "requiredValue": "Category2"
+        },{
+          "type": "IsLessThanConstantConstraint",
+          "field": {
+            "name": "MaximumAmount"
+          },
+          "referenceValue": 250
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "Category"
+            },
+            "requiredValue": "Category2"
+          }
+        }]
+      }]
+    },{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "Category"
+          },
+          "requiredValue": "Category1"
+        },{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "AuditType"
+          },
+          "requiredValue": "AuditType1"
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "Category"
+            },
+            "requiredValue": "Category1"
+          }
+        }]
+      }]
+    },{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "Category"
+          },
+          "requiredValue": "Category2"
+        },{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "AuditType"
+          },
+          "requiredValue": "AuditType3"
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "Category"
+            },
+            "requiredValue": "Category2"
+          }
+        }]
+      }]
+    }]
+  },
+  "fields": {
+    "fields": [{
+      "name": "ProductType"
+    },{
+      "name": "Price"
+    },{
+      "name": "Category"
+    },{
+      "name": "MaximumAmount"
+    },{
+      "name": "AuditType"
+    }]
+  }
+}]
