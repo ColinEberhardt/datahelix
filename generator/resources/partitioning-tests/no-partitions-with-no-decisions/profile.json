@@ -1,0 +1,217 @@
+{
+  "schemaVersion": "v3",
+  "description": "Tests that a profile containing no decisions returns a single tree",
+  "fields": [
+    "FirstField",
+    "SecondField",
+    "ThirdField",
+    "FourthField",
+    "FifthField",
+    "SixthField",
+    "SeventhField",
+    "EighthField",
+    "NinethField",
+    "TenthField",
+    "EleventhField",
+    "TwelfthField"
+  ],
+  "rules": [{
+    "rule": "FirstField",
+    "constraints": [{
+      "field": "FirstField",
+      "is": "inSet",
+      "values": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },{
+      "not": {
+        "field": "FirstField",
+        "is": "null"
+      }
+    }]
+  },{
+    "rule": "SecondField",
+    "constraints": [{
+      "field": "SecondField",
+      "is": "ofType",
+      "value": "numeric"
+    },{
+      "field": "SecondField",
+      "is": "greaterThan",
+      "value": 7
+    },{
+      "field": "SecondField",
+      "is": "lessThan",
+      "value": 15
+    },{
+      "not": {
+        "field": "SecondField",
+        "is": "null"
+      }
+    }]
+  },{
+    "rule": "ThirdField",
+    "constraints": [{
+      "field": "ThirdField",
+      "is": "ofType",
+      "value": "numeric"
+    },{
+      "not": {
+        "field": "ThirdField",
+        "is": "null"
+      }
+    }]
+  },{
+    "rule": "FourthField",
+    "constraints": [{
+      "field": "FourthField",
+      "is": "ofType",
+      "value": "string"
+    },{
+      "field": "FourthField",
+      "is": "shorterThan",
+      "value": 100
+    }]
+  },{
+    "rule": "FifthField",
+    "constraints": [{
+      "field": "FifthField",
+      "is": "inSet",
+      "values": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },{
+      "not": {
+        "field": "FifthField",
+        "is": "null"
+      }
+    }]
+  },{
+    "rule": "SixthField",
+    "constraints": [{
+      "field": "SixthField",
+      "is": "inSet",
+      "values": [
+        5,
+        10,
+        15,
+        20,
+        25
+      ]
+    },{
+      "not": {
+        "field": "SixthField",
+        "is": "null"
+      }
+    }]
+  },{
+    "rule": "SeventhField",
+    "constraints": [{
+      "field": "SeventhField",
+      "is": "ofType",
+      "value": "string"
+    },{
+      "field": "SeventhField",
+      "is": "longerThan",
+      "value": 0
+    },{
+      "field": "SeventhField",
+      "is": "shorterThan",
+      "value": 50
+    },{
+      "not": {
+        "field": "SeventhField",
+        "is": "null"
+      }
+    }]
+  },{
+    "rule": "EighthField",
+    "constraints": [{
+      "field": "EighthField",
+      "is": "ofType",
+      "value": "string"
+    },{
+      "field": "EighthField",
+      "is": "ofLength",
+      "value": 30
+    },{
+      "not": {
+        "field": "EighthField",
+        "is": "null"
+      }
+    }]
+  },{
+    "rule": "NinethField",
+    "constraints": [{
+      "field": "NinethField",
+      "is": "ofType",
+      "value": "string"
+    },{
+      "not": {
+        "field": "NinethField",
+        "is": "null"
+      }
+    }]
+  },{
+    "rule": "TenthField",
+    "constraints": [{
+      "field": "TenthField",
+      "is": "inSet",
+      "values": [
+        "TenA",
+        "TenB",
+        "TenC"
+      ]
+    }]
+  },{
+    "rule": "EleventhField",
+    "constraints": [{
+      "field": "EleventhField",
+      "is": "ofType",
+      "value": "string"
+    },{
+      "field": "EleventhField",
+      "is": "longerThan",
+      "value": 10
+    },{
+      "not": {
+        "field": "EleventhField",
+        "is": "null"
+      }
+    }]
+  },{
+    "rule": "TwelfthField",
+    "constraints": [{
+      "field": "TwelfthField",
+      "is": "ofType",
+      "value": "numeric"
+    },{
+      "field": "TwelfthField",
+      "is": "greaterThan",
+      "value": 0
+    },{
+      "field": "TwelfthField",
+      "is": "lessThan",
+      "value": 11
+    },{
+      "not": {
+        "anyOf": [{
+          "field": "TwelfthField",
+          "is": "equalTo",
+          "value": 6
+        },{
+          "field": "TwelfthField",
+          "is": "null"
+        }]
+      }
+    }]
+  }]
+}

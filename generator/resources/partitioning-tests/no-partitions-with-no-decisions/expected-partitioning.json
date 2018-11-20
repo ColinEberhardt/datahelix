@@ -1,0 +1,270 @@
+[{
+  "description": "NoPartitionsWithNoDecisions[0]",
+  "rootNode": {
+    "atomicConstraints": [{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "FirstField"
+      },
+      "legalValues": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "FirstField"
+        }
+      }
+    },{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "SecondField"
+      },
+      "requiredType": "Numeric"
+    },{
+      "type": "IsGreaterThanConstantConstraint",
+      "field": {
+        "name": "SecondField"
+      },
+      "referenceValue": 7
+    },{
+      "type": "IsLessThanConstantConstraint",
+      "field": {
+        "name": "SecondField"
+      },
+      "referenceValue": 15
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "SecondField"
+        }
+      }
+    },{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "ThirdField"
+      },
+      "requiredType": "Numeric"
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "ThirdField"
+        }
+      }
+    },{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "FourthField"
+      },
+      "requiredType": "String"
+    },{
+      "type": "IsStringShorterThanConstraint",
+      "field": {
+        "name": "FourthField"
+      },
+      "referenceValue": 100
+    },{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "FifthField"
+      },
+      "legalValues": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "FifthField"
+        }
+      }
+    },{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "SixthField"
+      },
+      "legalValues": [
+        5,
+        10,
+        15,
+        20,
+        25
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "SixthField"
+        }
+      }
+    },{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "SeventhField"
+      },
+      "requiredType": "String"
+    },{
+      "type": "IsStringLongerThanConstraint",
+      "field": {
+        "name": "SeventhField"
+      },
+      "referenceValue": 0
+    },{
+      "type": "IsStringShorterThanConstraint",
+      "field": {
+        "name": "SeventhField"
+      },
+      "referenceValue": 50
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "SeventhField"
+        }
+      }
+    },{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "EighthField"
+      },
+      "requiredType": "String"
+    },{
+      "type": "StringHasLengthConstraint",
+      "field": {
+        "name": "EighthField"
+      },
+      "referenceValue": 30
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "EighthField"
+        }
+      }
+    },{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "NinethField"
+      },
+      "requiredType": "String"
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "NinethField"
+        }
+      }
+    },{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "TenthField"
+      },
+      "legalValues": [
+        "TenA",
+        "TenB",
+        "TenC"
+      ]
+    },{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "EleventhField"
+      },
+      "requiredType": "String"
+    },{
+      "type": "IsStringLongerThanConstraint",
+      "field": {
+        "name": "EleventhField"
+      },
+      "referenceValue": 10
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "EleventhField"
+        }
+      }
+    },{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "TwelfthField"
+      },
+      "requiredType": "Numeric"
+    },{
+      "type": "IsGreaterThanConstantConstraint",
+      "field": {
+        "name": "TwelfthField"
+      },
+      "referenceValue": 0
+    },{
+      "type": "IsLessThanConstantConstraint",
+      "field": {
+        "name": "TwelfthField"
+      },
+      "referenceValue": 11
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsEqualToConstantConstraint",
+        "field": {
+          "name": "TwelfthField"
+        },
+        "requiredValue": 6
+      }
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "TwelfthField"
+        }
+      }
+    }]
+  },
+  "fields": {
+    "fields": [{
+      "name": "FirstField"
+    },{
+      "name": "SecondField"
+    },{
+      "name": "ThirdField"
+    },{
+      "name": "FourthField"
+    },{
+      "name": "FifthField"
+    },{
+      "name": "SixthField"
+    },{
+      "name": "SeventhField"
+    },{
+      "name": "EighthField"
+    },{
+      "name": "NinethField"
+    },{
+      "name": "TenthField"
+    },{
+      "name": "EleventhField"
+    },{
+      "name": "TwelfthField"
+    }]
+  }
+}]

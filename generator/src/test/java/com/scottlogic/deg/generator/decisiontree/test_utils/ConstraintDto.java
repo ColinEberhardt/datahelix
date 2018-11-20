@@ -15,7 +15,9 @@ import com.scottlogic.deg.generator.decisiontree.tree_partitioning.test_utils.ma
         @JsonSubTypes.Type(value = IsNullConstraintDto.class, name = "IsNullConstraint"),
         @JsonSubTypes.Type(value = IsLessThanConstantConstraintDto.class, name = "IsLessThanConstantConstraint"),
         @JsonSubTypes.Type(value = IsGreaterThanConstantConstraintDto.class, name = "IsGreaterThanConstantConstraint"),
-        @JsonSubTypes.Type(value = IsGreaterThanOrEqualToConstantConstraintDto.class, name = "IsGreaterThanOrEqualToConstantConstraint")
+        @JsonSubTypes.Type(value = IsGreaterThanOrEqualToConstantConstraintDto.class, name = "IsGreaterThanOrEqualToConstantConstraint"),
+        @JsonSubTypes.Type(value = IsStringLongerThanConstraintDto.class, name = "IsStringLongerThanConstraint"),
+        @JsonSubTypes.Type(value = StringHasLengthConstraintDto.class, name = "StringHasLengthConstraint")
 })
 public interface ConstraintDto extends IConstraintMapper {
 }
