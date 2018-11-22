@@ -1,0 +1,278 @@
+{
+  "schemaVersion": "v3",
+  "description": "Tests that a profile that contains all unique data sets can be correctly partitioned",
+  "fields":
+  [
+    { "name": "Asset" },
+    { "name": "AssetType" },
+    { "name": "AccountType" },
+    { "name": "AuditLevel" },
+    { "name": "AccountLevel" },
+    { "name": "FundValue" },
+    { "name": "FundType" }
+  ],
+  "rules": [{
+    "rule": "Asset",
+    "constraints": [{
+      "field": "Asset",
+      "is": "inSet",
+      "values": [
+        "First Wealthy Asset",
+        "Second Wealthy Asset",
+        "Third Wealthy Asset",
+        "First Average Asset",
+        "Second Average Asset",
+        "Third Average Asset",
+        "Fourth Average Asset",
+        "First Low Asset",
+        "Second Low Asset"
+      ]
+    },{
+      "not": {
+        "field": "Asset",
+        "is": "null"
+      }
+    },{
+      "if": {
+        "field": "AssetType",
+        "is": "equalTo",
+        "value": "High"
+      },
+      "then": {
+        "field": "Asset",
+        "is": "inSet",
+        "values": [
+          "First Wealthy Asset",
+          "Second Wealthy Asset",
+          "Third Wealthy Asset"
+        ]
+      }
+    },{
+      "if": {
+        "field": "AssetType",
+        "is": "equalTo",
+        "value": "Average"
+      },
+      "then": {
+        "field": "Asset",
+        "is": "inSet",
+        "values": [
+          "First Average Asset",
+          "Second Average Asset",
+          "Third Average Asset",
+          "Fourth Average Asset"
+        ]
+      }
+    },{
+      "if": {
+        "field": "AssetType",
+        "is": "equalTo",
+        "value": "Low"
+      },
+      "then": {
+        "field": "Asset",
+        "is": "inSet",
+        "values": [
+          "First Low Asset",
+          "Second Low Asset"
+        ]
+      }
+    }]
+  },{
+    "rule": "AssetType",
+    "constraints": [{
+      "field": "AssetType",
+      "is": "inSet",
+      "values": [
+        "High",
+        "Average",
+        "Low"
+      ]
+    },{
+      "not": {
+        "field": "AssetType",
+        "is": "null"
+      }
+    }]
+  },{
+    "rule": "AccountType",
+    "constraints": [{
+      "field": "AccountType",
+      "is": "inSet",
+      "values": [
+        "AccountType1",
+        "AccountType2",
+        "AccountType3",
+        "AccountType4",
+        "AccountType5"
+      ]
+    },{
+      "not": {
+        "field": "AccountType",
+        "is": "null"
+      }
+    }]
+  },{
+    "rule": "AuditLevel",
+    "constraints": [{
+      "field": "AuditLevel",
+      "is": "inSet",
+      "values": [
+        "Maximum",
+        "Minimum",
+        "Custom"
+      ]
+    },{
+      "not": {
+        "field": "AuditLevel",
+        "is": "null"
+      }
+    }]
+  },{
+    "rule": "AccountLevel",
+    "constraints": [{
+      "field": "AccountLevel",
+      "is": "inSet",
+      "values": [
+        "AccountLevel1",
+        "AccountLevel2",
+        "AccountLevel3"
+      ]
+    },{
+      "not": {
+        "field": "AccountLevel",
+        "is": "null"
+      }
+    },{
+      "if": {
+        "field": "AccountType",
+        "is": "inSet",
+        "values": [
+          "AccountType1",
+          "AccountType3"
+        ]
+      },
+      "then": {
+        "field": "AccountLevel",
+        "is": "equalTo",
+        "value": "AccountLevel1"
+      }
+    },{
+      "if": {
+        "field": "AccountType",
+        "is": "inSet",
+        "values": [
+          "AccountType2",
+          "AccountType4"
+        ]
+      },
+      "then": {
+        "field": "AccountLevel",
+        "is": "equalTo",
+        "value": "AccountLevel2"
+      }
+    },{
+      "if": {
+        "field": "AccountType",
+        "is": "equalTo",
+        "value": "AccountType5"
+      },
+      "then": {
+        "field": "AccountLevel",
+        "is": "equalTo",
+        "value": "AccountLevel3"
+      }
+    }]
+  },{
+    "rule": "FundValue",
+    "constraints": [{
+      "field": "FundValue",
+      "is": "inSet",
+      "values": [
+        10,
+        15,
+        25,
+        30,
+        50,
+        65,
+        70,
+        73,
+        80,
+        100
+      ]
+    },{
+      "not": {
+        "field": "FundValue",
+        "is": "null"
+      }
+    },{
+      "if": {
+        "field": "FundType",
+        "is": "equalTo",
+        "value": "FundType1"
+      },
+      "then": {
+        "field": "FundValue",
+        "is": "inSet",
+        "values": [
+          10,
+          15,
+          50,
+          65
+        ]
+      }
+    },{
+      "if": {
+        "field": "FundType",
+        "is": "equalTo",
+        "value": "FundType2"
+      },
+      "then": {
+        "field": "FundValue",
+        "is": "inSet",
+        "values": [
+          30,
+          50,
+          70,
+          73,
+          100
+        ]
+      }
+    },{
+      "if": {
+        "field": "FundType",
+        "is": "equalTo",
+        "value": "FundType3"
+      },
+      "then": {
+        "field": "FundValue",
+        "is": "inSet",
+        "values": [
+          10,
+          15,
+          30,
+          65,
+          73,
+          80,
+          100
+        ]
+      }
+    }]
+  },{
+    "rule": "FundType",
+    "constraints": [{
+      "field": "FundType",
+      "is": "inSet",
+      "values": [
+        "FundType1",
+        "FundType2",
+        "FundType3"
+      ]
+    },{
+      "not": {
+        "field": "FundType",
+        "is": "null"
+      }
+    }]
+  }]
+}

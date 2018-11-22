@@ -1,0 +1,477 @@
+[{
+  "description": "UniqueDataSets[0]",
+  "rootNode": {
+    "atomicConstraints": [{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "Asset"
+      },
+      "legalValues": [
+        "First Wealthy Asset",
+        "Second Wealthy Asset",
+        "Third Wealthy Asset",
+        "First Average Asset",
+        "Second Average Asset",
+        "Third Average Asset",
+        "Fourth Average Asset",
+        "First Low Asset",
+        "Second Low Asset"
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "Asset"
+        }
+      }
+    },{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "AssetType"
+      },
+      "legalValues": [
+        "Low",
+        "Average",
+        "High"
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "AssetType"
+        }
+      }
+    }],
+    "decisions": [{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "AssetType"
+          },
+          "requiredValue": "High"
+        },{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "Asset"
+          },
+          "legalValues": [
+            "First Wealthy Asset",
+            "Second Wealthy Asset",
+            "Third Wealthy Asset"
+          ]
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "AssetType"
+            },
+            "requiredValue": "High"
+          }
+        }]
+      }]
+    },{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "AssetType"
+          },
+          "requiredValue": "Average"
+        },{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "Asset"
+          },
+          "legalValues": [
+            "First Average Asset",
+            "Second Average Asset",
+            "Third Average Asset",
+            "Fourth Average Asset"
+          ]
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "AssetType"
+            },
+            "requiredValue": "Average"
+          }
+        }]
+      }]
+    },{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "AssetType"
+          },
+          "requiredValue": "Low"
+        },{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "Asset"
+          },
+          "legalValues": [
+            "First Low Asset",
+            "Second Low Asset"
+          ]
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "AssetType"
+            },
+            "requiredValue": "Low"
+          }
+        }]
+      }]
+    }]
+  },
+  "fields": {
+    "fields": [{
+      "name": "Asset"
+    },{
+      "name": "AssetType"
+    }]
+  }
+},{
+  "description": "UniqueDataSets[1]",
+  "rootNode": {
+    "atomicConstraints": [{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "AccountType"
+      },
+      "legalValues": [
+        "AccountType1",
+        "AccountType2",
+        "AccountType3",
+        "AccountType4",
+        "AccountType5"
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "AccountType"
+        }
+      }
+    },{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "AccountLevel"
+      },
+      "legalValues": [
+        "AccountLevel1",
+        "AccountLevel2",
+        "AccountLevel3"
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "AccountLevel"
+        }
+      }
+    }],
+    "decisions": [{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "AccountType"
+          },
+          "legalValues": [
+            "AccountType1",
+            "AccountType3"
+          ]
+        },{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "AccountLevel"
+          },
+          "requiredValue": "AccountLevel1"
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsInSetConstraint",
+            "field": {
+              "name": "AccountType"
+            },
+            "legalValues": [
+              "AccountType1",
+              "AccountType3"
+            ]
+          }
+        }]
+      }]
+    },{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "AccountType"
+          },
+          "legalValues": [
+            "AccountType2",
+            "AccountType4"
+          ]
+        },{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "AccountLevel"
+          },
+          "requiredValue": "AccountLevel2"
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsInSetConstraint",
+            "field": {
+              "name": "AccountType"
+            },
+            "legalValues": [
+              "AccountType2",
+              "AccountType4"
+            ]
+          }
+        }]
+      }]
+    },{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "AccountType"
+          },
+          "requiredValue": "AccountType5"
+        },{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "AccountLevel"
+          },
+          "requiredValue": "AccountLevel3"
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "AccountType"
+            },
+            "requiredValue": "AccountType5"
+          }
+        }]
+      }]
+    }]
+  },
+  "fields": {
+    "fields": [{
+      "name": "AccountType"
+    },{
+      "name": "AccountLevel"
+    }]
+  }
+},{
+  "description": "UniqueDataSets[2]",
+  "rootNode": {
+    "atomicConstraints": [{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "FundValue"
+      },
+      "legalValues": [
+        10,
+        15,
+        25,
+        30,
+        50,
+        65,
+        70,
+        73,
+        80,
+        100
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "FundValue"
+        }
+      }
+    },{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "FundType"
+      },
+      "legalValues": [
+        "FundType1",
+        "FundType2",
+        "FundType3"
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "FundType"
+        }
+      }
+    }],
+    "decisions": [{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "FundType"
+          },
+          "requiredValue": "FundType1"
+        },{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "FundValue"
+          },
+          "legalValues": [
+            10,
+            15,
+            50,
+            65
+          ]
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "FundType"
+            },
+            "requiredValue": "FundType1"
+          }
+        }]
+      }]
+    },{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "FundType"
+          },
+          "requiredValue": "FundType2"
+        },{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "FundValue"
+          },
+          "legalValues": [
+            30,
+            50,
+            70,
+            73,
+            100
+          ]
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "FundType"
+            },
+            "requiredValue": "FundType2"
+          }
+        }]
+      }]
+    },{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "FundType"
+          },
+          "requiredValue": "FundType3"
+        },{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "FundValue"
+          },
+          "legalValues": [
+            10,
+            15,
+            30,
+            65,
+            73,
+            80,
+            100
+          ]
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "FundType"
+            },
+            "requiredValue": "FundType3"
+          }
+        }]
+      }]
+    }]
+  },
+  "fields": {
+    "fields": [{
+      "name": "FundType"
+    },{
+      "name": "FundValue"
+    }]
+  }
+},{
+  "description": "UniqueDataSets[3]",
+  "rootNode": {
+    "atomicConstraints": [{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "AuditLevel"
+      },
+      "legalValues": [
+        "Maximum",
+        "Minimum",
+        "Custom"
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "AuditLevel"
+        }
+      }
+    }]
+  },
+  "fields": {
+    "fields": [{
+      "name": "AuditLevel"
+    }]
+  }
+}]
