@@ -1,0 +1,270 @@
+{
+  "schemaVersion": "v3",
+  "description": "Tests that a profile that has deeper rules referencing a top level field can be correctly partitioned",
+  "fields":
+  [
+    { "name": "User" },
+    { "name": "Profile" },
+    { "name": "Category" },
+    { "name": "Rule" },
+    { "name": "Description" },
+    { "name": "EventType" },
+    { "name": "Event" },
+    { "name": "EventHost" }
+  ],
+  "rules": [{
+    "rule": "User",
+    "constraints": [{
+      "field": "User",
+      "is": "ofType",
+      "value": "string"
+    },{
+      "not": {
+        "field": "User",
+        "is": "null"
+      }
+    },{
+      "if": {
+        "field": "Profile",
+        "is": "equalTo",
+        "value": "AdvancedProfile"
+      },
+      "then": {
+        "field": "User",
+        "is": "inSet",
+        "values": [
+          "AUser1",
+          "AUser2",
+          "AUser3"
+        ]
+      }
+    },{
+      "if": {
+        "field": "Profile",
+        "is": "equalTo",
+        "value": "MainProfile"
+      },
+      "then": {
+        "field": "User",
+        "is": "inSet",
+        "values": [
+          "MUser1",
+          "MUser2",
+          "MUser3"
+        ]
+      }
+    }]
+  },{
+    "rule": "Profile",
+    "constraints": [{
+      "field": "Profile",
+      "is": "inSet",
+      "values": [
+        "AdvancedProfile",
+        "MainProfile"
+      ]
+    },{
+      "not": {
+        "field": "Profile",
+        "is": "null"
+      }
+    }]
+  },{
+    "field": "Category",
+    "is": "inSet",
+    "values": [
+      "FirstCategory",
+      "SecondCategory",
+      "ThirdCategory",
+      "FourthCategory"
+    ]
+  },{
+    "not": {
+      "field": "Category",
+      "is": "null"
+    }
+  },{
+    "if": {
+      "field": "Rule",
+      "is": "equalTo",
+      "value": "InvalidRule"
+    },
+    "then": {
+      "field": "Category",
+      "is": "inSet",
+      "values": [
+        "FirstCategory",
+        "SecondCategory"
+      ]
+    }
+  },{
+    "if": {
+      "field": "Rule",
+      "is": "equalTo",
+      "value": "SingleRule"
+    },
+    "then": {
+      "field": "Category",
+      "is": "equalTo",
+      "value": "ThirdCategory"
+    }
+  },{
+    "if": {
+      "field": "Rule",
+      "is": "equalTo",
+      "value": "GeneralRule"
+    },
+    "then": {
+      "field": "Category",
+      "is": "inSet",
+      "values": [
+        "ThirdCategory",
+        "FourthCategory"
+      ]
+    }
+  },{
+    "rule": "Rule",
+    "constraints": [{
+      "field": "Rule",
+      "is": "inSet",
+      "values": [
+        "InvalidRule",
+        "GeneralRule",
+        "SingleRule"
+      ]
+    },{
+      "not": {
+        "field": "Rule",
+        "is": "null"
+      }
+    }]
+  },{
+    "rule": "Description",
+    "constraints": [{
+      "field": "Description",
+      "is": "ofType",
+      "value": "string"
+    },{
+      "not": {
+        "field": "Description",
+        "is": "null"
+      }
+    },{
+      "if": {
+        "field": "Rule",
+        "is": "equalTo",
+        "value": "InvalidRule"
+      },
+      "then": {
+        "if": {
+          "field": "Category",
+          "is": "equalTo",
+          "value": "ThirdCategory"
+        },
+        "then": {
+          "if": {
+            "field": "Profile",
+            "is": "equalTo",
+            "value": "MainProfile"
+          },
+          "then": {
+            "field": "Description",
+            "is": "shorterThan",
+            "value": 150
+          }
+        }
+      }
+    }]
+  },{
+    "rule": "EventType",
+    "constraints": [{
+      "field": "EventType",
+      "is": "inSet",
+      "values": [
+        "EventType1",
+        "EventType2",
+        "EventType3"
+      ]
+    },{
+      "not": {
+        "field": "EventType",
+        "is": "null"
+      }
+    }]
+  },{
+    "rule": "Event",
+    "constraints": [{
+      "field": "Event",
+      "is": "ofType",
+      "value": "string"
+    },{
+      "not": {
+        "field": "Event",
+        "is": "null"
+      }
+    },{
+      "if": {
+        "field": "EventType",
+        "is": "equalTo",
+        "value": "EventType1"
+      },
+      "then": {
+        "field": "Event",
+        "is": "equalTo",
+        "value": "Big Event"
+      }
+    },{
+      "if": {
+        "field": "EventType",
+        "is": "inSet",
+        "values": [
+          "EventType2",
+          "EventType3"
+        ]
+      },
+      "then": {
+        "field": "Event",
+        "is": "equalTo",
+        "value": "Regular Event"
+      }
+    }]
+  },{
+    "rule": "EventHost",
+    "constraints": [{
+      "field": "EventHost",
+      "is": "inSet",
+      "values": [
+        "Host1",
+        "Host2",
+        "Host3",
+        "Host4"
+      ]
+    },{
+      "not": {
+        "field": "EventHost",
+        "is": "null"
+      }
+    },{
+      "if": {
+        "field": "Event",
+        "is": "equalTo",
+        "value": "Big Event"
+      },
+      "then": {
+        "if": {
+          "field": "EventType",
+          "is": "equalTo",
+          "value": "EventType3"
+        },
+        "then": {
+          "field": "EventHost",
+          "is": "inSet",
+          "values": [
+            "Host1",
+            "Host4"
+          ]
+        }
+      }
+    }]
+  }]
+}

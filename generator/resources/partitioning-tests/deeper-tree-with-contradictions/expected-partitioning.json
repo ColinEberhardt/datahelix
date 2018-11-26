@@ -1,0 +1,500 @@
+[{
+  "description": "DeeperTreeWithContradictions[0]",
+  "rootNode": {
+    "atomicConstraints": [{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "User"
+      },
+      "requiredType": "String"
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "User"
+        }
+      }
+    },{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "Profile"
+      },
+      "legalValues": [
+        "AdvancedProfile",
+        "MainProfile"
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "Profile"
+        }
+      }
+    },{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "Category"
+      },
+      "legalValues": [
+        "FirstCategory",
+        "SecondCategory",
+        "ThirdCategory",
+        "FourthCategory"
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "Category"
+        }
+      }
+    },{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "Rule"
+      },
+      "legalValues": [
+        "InvalidRule",
+        "SingleRule",
+        "GeneralRule"
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "Rule"
+        }
+      }
+    },{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "Description"
+      },
+      "requiredType": "String"
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "Description"
+        }
+      }
+    }],
+    "decisions": [{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "Profile"
+          },
+          "requiredValue": "AdvancedProfile"
+        },{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "User"
+          },
+          "legalValues": [
+            "AUser1",
+            "AUser2",
+            "AUser3"
+          ]
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "Profile"
+            },
+            "requiredValue": "AdvancedProfile"
+          }
+        }]
+      }]
+    },{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "Profile"
+          },
+          "requiredValue": "MainProfile"
+        },{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "User"
+          },
+          "legalValues": [
+            "MUser1",
+            "MUser2",
+            "MUser3"
+          ]
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "Profile"
+            },
+            "requiredValue": "MainProfile"
+          }
+        }]
+      }]
+    },{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "Rule"
+          },
+          "requiredValue": "InvalidRule"
+        },{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "Category"
+          },
+          "legalValues": [
+            "FirstCategory",
+            "SecondCategory"
+          ]
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "Rule"
+            },
+            "requiredValue": "InvalidRule"
+          }
+        }]
+      }]
+    },{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "Rule"
+          },
+          "requiredValue": "SingleRule"
+        },{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "Category"
+          },
+          "requiredValue": "ThirdCategory"
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "Rule"
+            },
+            "requiredValue": "SingleRule"
+          }
+        }]
+      }]
+    },{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "Rule"
+          },
+          "requiredValue": "GeneralRule"
+        },{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "Category"
+          },
+          "legalValues": [
+            "ThirdCategory",
+            "FourthCategory"
+          ]
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "Rule"
+            },
+            "requiredValue": "GeneralRule"
+          }
+        }]
+      }]
+    },{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "Rule"
+          },
+          "requiredValue": "InvalidRule"
+        }],
+        "decisions": [{
+          "options": [{
+            "atomicConstraints": [{
+              "type": "IsEqualToConstantConstraint",
+              "field": {
+                "name": "Category"
+              },
+              "requiredValue": "ThirdCategory"
+            }],
+            "decisions": [{
+              "options": [{
+                "atomicConstraints": [{
+                  "type": "IsEqualToConstantConstraint",
+                  "field": {
+                    "name": "Profile"
+                  },
+                  "requiredValue": "MainProfile"
+                },{
+                  "type": "IsStringShorterThanConstraint",
+                  "field": {
+                    "name": "Description"
+                  },
+                  "referenceValue": 150
+                }]
+              },{
+                "atomicConstraints": [{
+                  "type": "NotConstraint",
+                  "negatedConstraint": {
+                    "type": "IsEqualToConstantConstraint",
+                    "field": {
+                      "name": "Profile"
+                    },
+                    "requiredValue": "MainProfile"
+                  }
+                }]
+              }]
+            }]
+          },{
+            "atomicConstraints": [{
+              "type": "NotConstraint",
+              "negatedConstraint": {
+                "type": "IsEqualToConstantConstraint",
+                "field": {
+                  "name": "Category"
+                },
+                "requiredValue": "ThirdCategory"
+              }
+            }]
+          }]
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "Rule"
+            },
+            "requiredValue": "InvalidRule"
+          }
+        }]
+      }]
+    }]
+  },
+  "fields": {
+    "fields": [{
+      "name": "User"
+    },{
+      "name": "Profile"
+    },{
+      "name": "Category"
+    },{
+      "name": "Rule"
+    },{
+      "name": "Description"
+    }]
+  }
+},{
+  "description": "DeeperTreeWithContradictions[1]",
+  "rootNode": {
+    "atomicConstraints": [{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "EventType"
+      },
+      "legalValues": [
+        "EventType1",
+        "EventType2",
+        "EventType3"
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "EventType"
+        }
+      }
+    },{
+      "type": "IsOfTypeConstraint",
+      "field": {
+        "name": "Event"
+      },
+      "requiredType": "String"
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "Event"
+        }
+      }
+    },{
+      "type": "IsInSetConstraint",
+      "field": {
+        "name": "EventHost"
+      },
+      "legalValues": [
+        "Host1",
+        "Host2",
+        "Host3",
+        "Host4"
+      ]
+    },{
+      "type": "NotConstraint",
+      "negatedConstraint": {
+        "type": "IsNullConstraint",
+        "field": {
+          "name": "EventHost"
+        }
+      }
+    }],
+    "decisions": [{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "EventType"
+          },
+          "requiredValue": "EventType1"
+        },{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "Event"
+          },
+          "requiredValue": "Big Event"
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "EventType"
+            },
+            "requiredValue": "EventType1"
+          }
+        }]
+      }]
+    },{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsInSetConstraint",
+          "field": {
+            "name": "EventType"
+          },
+          "legalValues": [
+            "EventType2",
+            "EventType3"
+          ]
+        },{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "Event"
+          },
+          "requiredValue": "Regular Event"
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsInSetConstraint",
+            "field": {
+              "name": "EventType"
+            },
+            "legalValues": [
+              "EventType2",
+              "EventType3"
+            ]
+          }
+        }]
+      }]
+    },{
+      "options": [{
+        "atomicConstraints": [{
+          "type": "IsEqualToConstantConstraint",
+          "field": {
+            "name": "Event"
+          },
+          "requiredValue": "Big Event"
+        }],
+        "decisions": [{
+          "options": [{
+            "atomicConstraints": [{
+              "type": "IsEqualToConstantConstraint",
+              "field": {
+                "name": "EventType"
+              },
+              "requiredValue": "EventType3"
+            },{
+              "type": "IsInSetConstraint",
+              "field": {
+                "name": "EventHost"
+              },
+              "legalValues": [
+                "Host1",
+                "Host4"
+              ]
+            }]
+          },{
+            "atomicConstraints": [{
+              "type": "NotConstraint",
+              "negatedConstraint": {
+                "type": "IsEqualToConstantConstraint",
+                "field": {
+                  "name": "EventType"
+                },
+                "requiredValue": "EventType3"
+              }
+            }]
+          }]
+        }]
+      },{
+        "atomicConstraints": [{
+          "type": "NotConstraint",
+          "negatedConstraint": {
+            "type": "IsEqualToConstantConstraint",
+            "field": {
+              "name": "Event"
+            },
+            "requiredValue": "Big Event"
+          }
+        }]
+      }]
+    }]
+  },
+  "fields": {
+    "fields": [{
+      "name": "EventType"
+    },{
+      "name": "Event"
+    },{
+      "name": "EventHost"
+    }]
+  }
+}]
