@@ -209,17 +209,15 @@
       }]
     }]
   },
-  "fields": {
-    "fields": [{
-      "name": "UserType"
-    },{
-      "name": "PostType"
-    },{
-      "name": "Post"
-    },{
-      "name": "Action"
-    }]
-  }
+  "fields": [{
+    "name": "UserType"
+  },{
+    "name": "PostType"
+  },{
+    "name": "Post"
+  },{
+    "name": "Action"
+  }]
 },{
   "description": "DeeperTree[1]",
   "rootNode": {
@@ -355,13 +353,11 @@
       }]
     }]
   },
-  "fields": {
-    "fields": [{
-      "name": "Event"
-    },{
-      "name": "Topic"
-    },{
-      "name": "Duration"
-    }]
-  }
+  "fields": [{
+    "name": "Event"
+  },{
+    "name": "Topic"
+  },{
+    "name": "Duration"
+  }]
 }]

@@ -240,31 +240,29 @@
       }
     }]
   },
-  "fields": {
-    "fields": [{
-      "name": "FirstField"
-    },{
-      "name": "SecondField"
-    },{
-      "name": "ThirdField"
-    },{
-      "name": "FourthField"
-    },{
-      "name": "FifthField"
-    },{
-      "name": "SixthField"
-    },{
-      "name": "SeventhField"
-    },{
-      "name": "EighthField"
-    },{
-      "name": "NinethField"
-    },{
-      "name": "TenthField"
-    },{
-      "name": "EleventhField"
-    },{
-      "name": "TwelfthField"
-    }]
-  }
+  "fields": [{
+    "name": "FirstField"
+  },{
+    "name": "SecondField"
+  },{
+    "name": "ThirdField"
+  },{
+    "name": "FourthField"
+  },{
+    "name": "FifthField"
+  },{
+    "name": "SixthField"
+  },{
+    "name": "SeventhField"
+  },{
+    "name": "EighthField"
+  },{
+    "name": "NinethField"
+  },{
+    "name": "TenthField"
+  },{
+    "name": "EleventhField"
+  },{
+    "name": "TwelfthField"
+  }]
 }]

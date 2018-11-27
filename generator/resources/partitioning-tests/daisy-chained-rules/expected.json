@@ -128,15 +128,13 @@
       }]
     }]
   },
-  "fields": {
-    "fields": [{
-      "name": "FirstField"
-    },{
-      "name": "SecondField"
-    },{
-      "name": "ThirdField"
-    }]
-  }
+  "fields": [{
+    "name": "FirstField"
+  },{
+    "name": "SecondField"
+  },{
+    "name": "ThirdField"
+  }]
 },{
   "description": "DaisyChain[1]",
   "rootNode": {
@@ -215,13 +213,11 @@
       }]
     }]
   },
-  "fields": {
-    "fields": [{
-      "name": "FourthField"
-    },{
-      "name": "FifthField"
-    }]
-  }
+  "fields": [{
+    "name": "FourthField"
+  },{
+    "name": "FifthField"
+  }]
 },{
   "description": "DaisyChain[2]",
   "rootNode": {
@@ -336,13 +332,11 @@
       }]
     }]
   },
-  "fields": {
-    "fields": [{
+  "fields": [{
       "name": "SixthField"
     },{
       "name": "SeventhField"
     },{
       "name": "EighthField"
     }]
-  }
 }]

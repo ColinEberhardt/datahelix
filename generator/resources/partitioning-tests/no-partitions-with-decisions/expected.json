@@ -227,17 +227,15 @@
       }]
     }]
   },
-  "fields": {
-    "fields": [{
-      "name": "ProductType"
-    },{
-      "name": "Price"
-    },{
-      "name": "Category"
-    },{
-      "name": "MaximumAmount"
-    },{
-      "name": "AuditType"
-    }]
-  }
+  "fields": [{
+    "name": "ProductType"
+  },{
+    "name": "Price"
+  },{
+    "name": "Category"
+  },{
+    "name": "MaximumAmount"
+  },{
+    "name": "AuditType"
+  }]
 }]

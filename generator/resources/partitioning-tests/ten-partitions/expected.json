@@ -53,13 +53,11 @@
       }]
     }]
   },
-  "fields": {
-    "fields": [{
-      "name":  "FirstA"
-    },{
-      "name": "FirstB"
-    }]
-  }
+  "fields": [{
+    "name":  "FirstA"
+  },{
+    "name": "FirstB"
+  }]
 },{
   "description": "TenPartitions[1]",
   "rootNode": {
@@ -121,13 +119,11 @@
       }]
     }]
   },
-  "fields": {
-    "fields": [{
-      "name": "SecondA"
-    },{
-      "name": "SecondB"
-    }]
-  }
+  "fields": [{
+    "name": "SecondA"
+  },{
+    "name": "SecondB"
+  }]
 },{
   "description": "TenPartitions[2]",
   "rootNode": {
@@ -197,13 +193,11 @@
       }]
     }]
   },
-  "fields": {
-    "fields": [{
-      "name": "ThirdA"
-    },{
-      "name": "ThirdB"
-    }]
-  }
+  "fields": [{
+    "name": "ThirdA"
+  },{
+    "name": "ThirdB"
+  }]
 },{
   "description": "TenPartitions[3]",
   "rootNode": {
@@ -255,13 +249,11 @@
       }]
     }]
   },
-  "fields": {
-    "fields": [{
-      "name": "FourthA"
-    },{
-      "name": "FourthB"
-    }]
-  }
+  "fields": [{
+    "name": "FourthA"
+  },{
+    "name": "FourthB"
+  }]
 },{
   "description": "TenPartitions[4]",
   "rootNode": {
@@ -336,13 +328,11 @@
       }]
     }]
   },
-  "fields": {
-    "fields": [{
-      "name": "FifthA"
-    },{
-      "name": "FifthB"
-    }]
-  }
+  "fields": [{
+    "name": "FifthA"
+  },{
+    "name": "FifthB"
+  }]
 },{
   "description": "TenPartitions[5]",
   "rootNode": {
@@ -386,13 +376,11 @@
       }]
     }]
   },
-  "fields": {
-    "fields": [{
-      "name": "SixthA"
-    },{
-      "name": "SixthB"
-    }]
-  }
+  "fields": [{
+    "name": "SixthA"
+  },{
+    "name": "SixthB"
+  }]
 },{
   "description": "TenPartitions[6]",
   "rootNode": {
@@ -454,13 +442,11 @@
       }]
     }]
   },
-  "fields": {
-    "fields": [{
-      "name": "SeventhA"
-    },{
-      "name": "SeventhB"
-    }]
-  }
+  "fields": [{
+    "name": "SeventhA"
+  },{
+    "name": "SeventhB"
+  }]
 },{
   "description": "TenParitions[7]",
   "rootNode": {
@@ -516,13 +502,11 @@
       }]
     }]
   },
-  "fields": {
-    "fields": [{
-      "name": "EighthA"
-    },{
-      "name": "EighthB"
-    }]
-  }
+  "fields": [{
+    "name": "EighthA"
+  },{
+    "name": "EighthB"
+  }]
 },{
   "description": "TenPartitions[8]",
   "rootNode": {
@@ -571,13 +555,11 @@
       }]
     }]
   },
-  "fields": {
-    "fields": [{
-      "name": "NinethA"
-    },{
-      "name": "NinethB"
-    }]
-  }
+  "fields": [{
+    "name": "NinethA"
+  },{
+    "name": "NinethB"
+  }]
 },{
   "description": "TenPartitions[9]",
   "rootNode": {
@@ -633,11 +615,9 @@
       }]
     }]
   },
-  "fields": {
-    "fields": [{
-      "name": "TenthA"
-    },{
-      "name": "TenthB"
-    }]
-  }
+  "fields": [{
+    "name": "TenthA"
+  },{
+    "name": "TenthB"
+  }]
 }]

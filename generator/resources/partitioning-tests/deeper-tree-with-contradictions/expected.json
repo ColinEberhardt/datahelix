@@ -306,19 +306,17 @@
       }]
     }]
   },
-  "fields": {
-    "fields": [{
-      "name": "User"
-    },{
-      "name": "Profile"
-    },{
-      "name": "Category"
-    },{
-      "name": "Rule"
-    },{
-      "name": "Description"
-    }]
-  }
+  "fields": [{
+    "name": "User"
+  },{
+    "name": "Profile"
+  },{
+    "name": "Category"
+  },{
+    "name": "Rule"
+  },{
+    "name": "Description"
+  }]
 },{
   "description": "DeeperTreeWithContradictions[1]",
   "rootNode": {
@@ -488,13 +486,11 @@
       }]
     }]
   },
-  "fields": {
-    "fields": [{
-      "name": "EventType"
-    },{
-      "name": "Event"
-    },{
-      "name": "EventHost"
-    }]
-  }
+  "fields": [{
+    "name": "EventType"
+  },{
+    "name": "Event"
+  },{
+    "name": "EventHost"
+  }]
 }]

@@ -139,13 +139,11 @@
       }]
     }]
   },
-  "fields": {
-    "fields": [{
-      "name": "Asset"
-    },{
-      "name": "AssetType"
-    }]
-  }
+  "fields": [{
+    "name": "Asset"
+  },{
+    "name": "AssetType"
+  }]
 },{
   "description": "UniqueDataSets[1]",
   "rootNode": {
@@ -283,13 +281,11 @@
       }]
     }]
   },
-  "fields": {
-    "fields": [{
-      "name": "AccountType"
-    },{
-      "name": "AccountLevel"
-    }]
-  }
+  "fields": [{
+    "name": "AccountType"
+  },{
+    "name": "AccountLevel"
+  }]
 },{
   "description": "UniqueDataSets[2]",
   "rootNode": {
@@ -439,13 +435,11 @@
       }]
     }]
   },
-  "fields": {
-    "fields": [{
-      "name": "FundType"
-    },{
-      "name": "FundValue"
-    }]
-  }
+  "fields": [{
+    "name": "FundType"
+  },{
+    "name": "FundValue"
+  }]
 },{
   "description": "UniqueDataSets[3]",
   "rootNode": {
@@ -469,9 +463,7 @@
       }
     }]
   },
-  "fields": {
-    "fields": [{
-      "name": "AuditLevel"
-    }]
-  }
+  "fields": [{
+    "name": "AuditLevel"
+  }]
 }]
