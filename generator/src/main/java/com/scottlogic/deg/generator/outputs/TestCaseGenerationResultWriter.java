@@ -50,9 +50,12 @@ public class TestCaseGenerationResultWriter {
             testCaseDtos.add(
                 new TestCaseDTO(
                     filenameWithoutExtension,
-                    dataset.violation == null
+                    dataset.violatedRule == null
                         ? Collections.emptyList()
-                        : Collections.singleton(dataset.violation.getDescription())));
+                        : Collections.singleton(dataset.violatedRule.getDescription()),
+                    dataset.violatedConstraint == null
+                        ? Collections.emptyList()
+                        : Collections.singleton(dataset.violatedConstraint.toString())));
 
             index++;
         }
