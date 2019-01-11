@@ -13,13 +13,16 @@ import java.util.stream.StreamSupport;
 public class StandardFieldValueSourceEvaluator implements FieldValueSourceEvaluator {
     private final MustContainRestrictionReducer mustContainRestrictionReducer = new MustContainRestrictionReducer();
 
-    public Set<FieldValueSource> getFieldValueSources(FieldSpec fieldSpec){
+    public Set<FieldValueSource> getFieldValueSources(FieldSpec fieldSpec, GenerationConfig generationConfig) {
         Set<FieldValueSource> validSources = new HashSet<>();
         MustContainRestriction mustContainRestriction = fieldSpec.getMustContainRestriction();
+        boolean violating = generationConfig.getIsViolating();
 
         // check nullability...
-        if (determineNullabilityAndDecideWhetherToHalt(validSources, fieldSpec))
+        if (!violating && shouldHaltDueToNullRestrictions(fieldSpec)) {
+            validSources.add(getNullabilityValueSource(fieldSpec));
             return validSources;
+        }
 
         // if there's a whitelist, we can just output that
         if (fieldSpec.getSetRestrictions() != null && fieldSpec.getSetRestrictions().getWhitelist() != null) {
@@ -30,6 +33,10 @@ public class StandardFieldValueSourceEvaluator implements FieldValueSourceEvalua
                 whitelist = Stream.concat(whitelist.stream(),
                 getNotNullSetRestrictionFilterOnMustContainRestriction(mustContainRestriction)
                     .flatMap(o -> o.getSetRestrictions().getWhitelist().stream())).collect(Collectors.toSet());
+            }
+
+            if (violating && fieldSpec.getNullRestrictions() != null) {
+                validSources.add(getNullabilityValueSource(fieldSpec));
             }
 
             Stream<Object> validSourcesValues = validSources
@@ -52,7 +59,7 @@ public class StandardFieldValueSourceEvaluator implements FieldValueSourceEvalua
         }
 
         if (mustContainRestriction != null) {
-            applyMustConstrainRestrictionToValidSources(validSources, fieldSpec);
+            applyMustConstrainRestrictionToValidSources(validSources, fieldSpec, generationConfig);
         }
 
         TypeRestrictions typeRestrictions = fieldSpec.getTypeRestrictions() != null
@@ -113,29 +120,35 @@ public class StandardFieldValueSourceEvaluator implements FieldValueSourceEvalua
                 getBlacklist(fieldSpec)));
         }
 
+        if (violating) {
+            validSources.add(getNullabilityValueSource(fieldSpec));
+        }
+
         return validSources;
     }
 
-    private boolean determineNullabilityAndDecideWhetherToHalt(
-        Set<FieldValueSource> fieldValueSources,
-        FieldSpec fieldSpec) {
+    private boolean shouldHaltDueToNullRestrictions(FieldSpec fieldSpec) {
+        if (fieldSpec.getNullRestrictions() != null) {
+            // if *always* null, add a null-only source and signal that no other sources are needed
+            return fieldSpec.getNullRestrictions().nullness == Nullness.MUST_BE_NULL;
+        }
 
+        return false;
+    }
+
+    private FieldValueSource getNullabilityValueSource(FieldSpec fieldSpec) {
         FieldValueSource nullOnlySource = new CannedValuesFieldValueSource(Collections.singletonList(null));
-
         if (fieldSpec.getNullRestrictions() != null) {
             if (fieldSpec.getNullRestrictions().nullness == Nullness.MUST_BE_NULL) {
                 // if *always* null, add a null-only source and signal that no other sources are needed
-                fieldValueSources.add(nullOnlySource);
-                return true;
+                return nullOnlySource;
             } else if (fieldSpec.getNullRestrictions().nullness == Nullness.MUST_NOT_BE_NULL) {
                 // if *never* null, add nothing and signal that source generation should continue
-                return false;
+                return new CannedValuesFieldValueSource(Collections.emptyList());
             }
         }
-
         // if none of the above, the field is nullable
-        fieldValueSources.add(nullOnlySource);
-        return false;
+        return nullOnlySource;
     }
 
     private Set<Object> getBlacklist(FieldSpec fieldSpec) {
@@ -151,12 +164,15 @@ public class StandardFieldValueSourceEvaluator implements FieldValueSourceEvalua
             .filter(o -> o.getSetRestrictions() != null);
     }
 
-    private void applyMustConstrainRestrictionToValidSources(Set<FieldValueSource> validSources, FieldSpec fieldSpec) {
+    private void applyMustConstrainRestrictionToValidSources(
+        Set<FieldValueSource> validSources,
+        FieldSpec fieldSpec,
+        GenerationConfig generationConfig) {
         Set<FieldSpec> mustContainRestrictionFieldSpecs = fieldSpec.getMustContainRestriction().getRequiredObjects();
         if (mustContainRestrictionFieldSpecs.size() > 1) {
             mustContainRestrictionFieldSpecs = mustContainRestrictionReducer.getReducedMustContainRestriction(fieldSpec);
         }
 
-        mustContainRestrictionFieldSpecs.forEach(fs -> validSources.addAll(getFieldValueSources(fs)));
+        mustContainRestrictionFieldSpecs.forEach(fs -> validSources.addAll(getFieldValueSources(fs, generationConfig)));
     }
 }

@@ -156,4 +156,7 @@ public class GenerateTestCases implements Runnable, GenerationConfigSource {
     public boolean getValidateProfile() {
         return validateProfile;
     }
+
+    @Override
+    public boolean getIsViolating() { return true; }
 }

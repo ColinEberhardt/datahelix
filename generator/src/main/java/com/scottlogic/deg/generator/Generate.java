@@ -161,4 +161,7 @@ public class Generate implements Runnable, GenerationConfigSource {
     public boolean getValidateProfile() {
         return validateProfile;
     }
+
+    @Override
+    public boolean getIsViolating() { return false; }
 }

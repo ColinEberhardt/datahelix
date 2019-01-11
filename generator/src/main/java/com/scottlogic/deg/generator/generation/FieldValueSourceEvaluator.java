@@ -6,5 +6,5 @@ import com.scottlogic.deg.generator.generation.field_value_sources.FieldValueSou
 import java.util.Set;
 
 public interface FieldValueSourceEvaluator {
-    Set<FieldValueSource> getFieldValueSources(FieldSpec fieldSpec);
+    Set<FieldValueSource> getFieldValueSources(FieldSpec fieldSpec, GenerationConfig generationConfig);
 }

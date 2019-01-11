@@ -31,7 +31,7 @@ public class FieldSpecValueGenerator implements DataBagSource {
 
     @Override
     public Stream<DataBag> generate(GenerationConfig generationConfig) {
-        Set<FieldValueSource> fieldValueSources = this.sourceFactory.getFieldValueSources(this.spec);
+        Set<FieldValueSource> fieldValueSources = this.sourceFactory.getFieldValueSources(this.spec, generationConfig);
 
         FieldValueSource combinedFieldValueSource = new CombiningFieldValueSource(fieldValueSources);
 

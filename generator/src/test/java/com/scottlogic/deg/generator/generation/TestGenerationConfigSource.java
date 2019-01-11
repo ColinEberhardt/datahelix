@@ -44,4 +44,5 @@ public class TestGenerationConfigSource implements GenerationConfigSource {
         return validateProfile;
     }
 
+    public boolean getIsViolating() { return true; }
 }

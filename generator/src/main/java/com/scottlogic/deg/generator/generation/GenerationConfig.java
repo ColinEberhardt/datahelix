@@ -14,6 +14,7 @@ public class GenerationConfig {
     private final CombinationStrategyType combinationStrategy;
     private final long maxRows;
     private final boolean validateProfile;
+    private final boolean isViolating;
 
     public GenerationConfig(GenerationConfigSource source) {
         this.dataGenerationType = source.getGenerationType();
@@ -21,7 +22,7 @@ public class GenerationConfig {
         this.combinationStrategy = source.getCombinationStrategyType();
         this.maxRows = source.getMaxRows();
         this.validateProfile = source.getValidateProfile();
-
+        this.isViolating = source.getIsViolating();
     }
 
     public DataGenerationType getDataGenerationType() {
@@ -48,6 +49,10 @@ public class GenerationConfig {
     }
 
     public long getMaxRows() { return maxRows; }
+
+    public boolean getIsViolating() {
+        return isViolating;
+    }
 
     public ProfileValidator getProfileValidator() {
 
