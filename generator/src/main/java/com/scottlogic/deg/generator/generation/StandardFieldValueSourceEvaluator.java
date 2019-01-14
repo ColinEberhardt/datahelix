@@ -19,8 +19,8 @@ public class StandardFieldValueSourceEvaluator implements FieldValueSourceEvalua
         boolean violating = generationConfig.getIsViolating();
 
         // check nullability...
-        if (!violating && shouldHaltDueToNullRestrictions(fieldSpec)) {
-            validSources.add(getNullabilityValueSource(fieldSpec));
+        validSources.add(getNullabilityValueSource(fieldSpec));
+        if (shouldHaltDueToNullRestrictions(fieldSpec)) {
             return validSources;
         }
 
@@ -31,13 +31,13 @@ public class StandardFieldValueSourceEvaluator implements FieldValueSourceEvalua
             // If we have values that must be included we need to check that those values are included in the whitelist
             if (mustContainRestriction != null) {
                 whitelist = Stream.concat(whitelist.stream(),
-                getNotNullSetRestrictionFilterOnMustContainRestriction(mustContainRestriction)
-                    .flatMap(o -> o.getSetRestrictions().getWhitelist().stream())).collect(Collectors.toSet());
+                    getNotNullSetRestrictionFilterOnMustContainRestriction(mustContainRestriction)
+                        .flatMap(o -> o.getSetRestrictions().getWhitelist().stream())).collect(Collectors.toSet());
             }
 
-            if (violating && fieldSpec.getNullRestrictions() != null) {
-                validSources.add(getNullabilityValueSource(fieldSpec));
-            }
+//            if (violating && fieldSpec.getNullRestrictions() != null) {
+//                validSources.add(getNullabilityValueSource(fieldSpec));
+//            }
 
             Stream<Object> validSourcesValues = validSources
                 .stream()
@@ -120,9 +120,9 @@ public class StandardFieldValueSourceEvaluator implements FieldValueSourceEvalua
                 getBlacklist(fieldSpec)));
         }
 
-        if (violating) {
-            validSources.add(getNullabilityValueSource(fieldSpec));
-        }
+//        if (violating) {
+//            validSources.add(getNullabilityValueSource(fieldSpec));
+//        }
 
         return validSources;
     }
@@ -142,9 +142,6 @@ public class StandardFieldValueSourceEvaluator implements FieldValueSourceEvalua
             if (fieldSpec.getNullRestrictions().nullness == Nullness.MUST_BE_NULL) {
                 // if *always* null, add a null-only source and signal that no other sources are needed
                 return nullOnlySource;
-            } else if (fieldSpec.getNullRestrictions().nullness == Nullness.MUST_NOT_BE_NULL) {
-                // if *never* null, add nothing and signal that source generation should continue
-                return new CannedValuesFieldValueSource(Collections.emptyList());
             }
         }
         // if none of the above, the field is nullable
