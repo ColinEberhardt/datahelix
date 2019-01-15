@@ -2,6 +2,7 @@ package com.scottlogic.deg.generator.walker.reductive;
 
 import com.scottlogic.deg.generator.constraints.atomic.AtomicConstraint;
 import com.scottlogic.deg.generator.decisiontree.ConstraintNode;
+import com.scottlogic.deg.generator.decisiontree.TreeConstraintNode;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -10,16 +11,23 @@ public class AdapterContext {
     private final HashSet<AtomicConstraint> unfixedAtomicConstraints = new HashSet<>();
     private final HashSet<AtomicConstraint> nonContradictoryAtomicConstraints = new HashSet<>();
     private final HashSet<AtomicConstraint> conflictingAtomicConstraints = new HashSet<>();
+    private final ConstraintNode rootNode;
 
     private boolean valid = true;
     private final AdapterContext parent;
 
-    AdapterContext() {
+    AdapterContext(ConstraintNode rootNode) {
+        this.rootNode = rootNode;
         this.parent = null;
     }
 
     private AdapterContext(AdapterContext parent) {
         this.parent = parent;
+        this.rootNode = parent.rootNode;
+    }
+
+    public ConstraintNode getRootNode() {
+        return rootNode;
     }
 
     Collection<AtomicConstraint> getAllUnfixedAtomicConstraints() {

@@ -126,7 +126,7 @@ public class GeneratorTestUtilities {
                     new NoOpIterationVisualiser(),
                     new FixedFieldBuilder(config, constraintReducer, fixFieldStrategy, monitor),
                     monitor,
-                    new ReductiveDecisionTreeReducer(fieldSpecFactory, fieldSpecMerger, new DecisionTreeSimplifier()),
+                    new ReductiveDecisionTreeReducer(fieldSpecFactory, fieldSpecMerger, new DecisionTreeSimplifier(), new ConstraintReducer(new FieldSpecFactory(), fieldSpecMerger)),
                     new ReductiveRowSpecGenerator(constraintReducer, fieldSpecMerger, monitor));
             default:
             case CARTESIAN_PRODUCT:

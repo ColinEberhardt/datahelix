@@ -56,7 +56,8 @@ public class RuntimeDecisionTreeWalkerFactory implements  DecisionTreeWalkerFact
                     new ReductiveDecisionTreeReducer(
                         fieldSpecFactory,
                         fieldSpecMerger,
-                        new DecisionTreeSimplifier()),
+                        new DecisionTreeSimplifier(),
+                        new ConstraintReducer(new FieldSpecFactory(), fieldSpecMerger)),
                     new ReductiveRowSpecGenerator(
                         constraintReducer,
                         fieldSpecMerger,
