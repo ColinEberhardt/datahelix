@@ -26,7 +26,7 @@ public class StringHasLengthConstraint implements AtomicConstraint, StringLength
 
     @Override
     public AtomicConstraint negate(){
-        return new NotStringHasLengthConstraint(field, referenceValue + 1, rules);
+        return new NotStringHasLengthConstraint(field, referenceValue, rules);
     }
 
     @Override
