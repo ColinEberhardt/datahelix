@@ -8,6 +8,7 @@ import com.scottlogic.deg.generator.utils.NumberUtils;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.regex.Pattern;
@@ -114,7 +115,10 @@ public class FieldSpecFactory {
         final TypeRestrictions typeRestrictions;
 
         if (negate) {
-            typeRestrictions = DataTypeRestrictions.ALL_TYPES_PERMITTED.except(constraint.requiredType);
+            typeRestrictions = new DataTypeRestrictions(
+                Arrays.stream(IsOfTypeConstraint.Types.values())
+                    .filter(type -> type != constraint.requiredType)
+                    .collect(Collectors.toSet()));
         } else {
             typeRestrictions = DataTypeRestrictions.createFromWhiteList(constraint.requiredType);
         }

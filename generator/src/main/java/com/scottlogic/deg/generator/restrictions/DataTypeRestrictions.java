@@ -18,18 +18,6 @@ public class DataTypeRestrictions implements TypeRestrictions {
     public static TypeRestrictions createFromWhiteList(IsOfTypeConstraint.Types... types) {
         return new DataTypeRestrictions(Arrays.asList(types));
     }
-
-    @Override
-    public TypeRestrictions except(IsOfTypeConstraint.Types... types) {
-        if (types.length == 0)
-            return this;
-
-        ArrayList<IsOfTypeConstraint.Types> allowedTypes = new ArrayList<>(this.allowedTypes);
-        allowedTypes.removeAll(Arrays.asList(types));
-
-        return new DataTypeRestrictions(allowedTypes);
-    }
-
     private final Set<IsOfTypeConstraint.Types> allowedTypes;
 
     @Override
