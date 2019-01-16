@@ -88,6 +88,8 @@ public class ReductiveDecisionTreeReducer {
                     case CONSTRAINT_CONTRADICTS:
                         context.addConflictingAtomicConstraint(atomicConstraint);
                         context.setIsInvalid();
+
+                        shouldIncludeAtomicConstraint(fixedFields, atomicConstraint, context);
                         return false;
                 }
 
@@ -135,6 +137,10 @@ public class ReductiveDecisionTreeReducer {
 
     private boolean atomicConstraintConflictsWithRootNode(AtomicConstraint atomicConstraint, AdapterContext context) {
         List<AtomicConstraint> atomicConstraintsAtRootNodeForField = context.getRootNode().getAtomicConstraints().stream().filter(ac -> ac.getField().equals(atomicConstraint.getField())).collect(Collectors.toList());
+
+        if (atomicConstraintsAtRootNodeForField.isEmpty()){
+            return false;
+        }
 
         FieldSpec fieldSpecForAtomicConstraint = this.fieldSpecFactory.construct(atomicConstraint);
         FieldSpec fieldSpecForRootNodeAtomicConstraints = this.constraintReducer.reduceConstraintsToFieldSpec(
