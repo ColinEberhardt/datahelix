@@ -6,8 +6,7 @@ import java.util.*;
 
 public class DataTypeRestrictions implements TypeRestrictions {
 
-    public final static TypeRestrictions ALL_TYPES_PERMITTED = new AnyTypeRestriction();
-    public final static TypeRestrictions NO_TYPES_PERMITTED = new NoAllowedTypesRestriction();
+    public final static TypeRestrictions ALL_TYPES_PERMITTED = new DataTypeRestrictions(Arrays.asList(IsOfTypeConstraint.Types.values()));
 
     public DataTypeRestrictions(Collection<IsOfTypeConstraint.Types> allowedTypes) {
         if (allowedTypes.size() == 0)
@@ -20,6 +19,7 @@ public class DataTypeRestrictions implements TypeRestrictions {
         return new DataTypeRestrictions(Arrays.asList(types));
     }
 
+    @Override
     public TypeRestrictions except(IsOfTypeConstraint.Types... types) {
         if (types.length == 0)
             return this;
@@ -32,6 +32,7 @@ public class DataTypeRestrictions implements TypeRestrictions {
 
     private final Set<IsOfTypeConstraint.Types> allowedTypes;
 
+    @Override
     public boolean isTypeAllowed(IsOfTypeConstraint.Types type){
         return allowedTypes.contains(type);
     }
@@ -45,26 +46,7 @@ public class DataTypeRestrictions implements TypeRestrictions {
                 Objects.toString(allowedTypes));
     }
 
-    public TypeRestrictions intersect(TypeRestrictions other) {
-        if (other == ALL_TYPES_PERMITTED)
-            return this;
-
-        ArrayList<IsOfTypeConstraint.Types> allowedTypes = new ArrayList<>(this.allowedTypes);
-        allowedTypes.retainAll(other.getAllowedTypes());
-
-        if (allowedTypes.isEmpty())
-            return null;
-
-        //micro-optimisation; if there is only one value in allowedTypes then there must have been only one value in either this.allowedTypes or other.allowedTypes
-        if (allowedTypes.size() == 1) {
-            return other.getAllowedTypes().size() == 1
-                    ? other
-                    : this;
-        }
-
-        return new DataTypeRestrictions(allowedTypes);
-    }
-
+    @Override
     public Set<IsOfTypeConstraint.Types> getAllowedTypes() {
         return allowedTypes;
     }

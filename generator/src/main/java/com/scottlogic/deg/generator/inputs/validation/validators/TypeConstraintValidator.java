@@ -12,7 +12,6 @@ import java.util.List;
 
 public class TypeConstraintValidator implements ConstraintValidatorAlerts {
 
-    public final ValidationType validationType = ValidationType.TYPE;
     private final List<ValidationAlert> alerts;
 
     private TypeRestrictions currentRestrictions;
@@ -29,22 +28,7 @@ public class TypeConstraintValidator implements ConstraintValidatorAlerts {
         TypeRestrictions candidateRestrictions = new DataTypeRestrictions(Arrays.asList(type));
         TypeRestrictionsMerger merger = new TypeRestrictionsMerger();
 
-        MergeResult<TypeRestrictions> result = merger.merge(currentRestrictions, candidateRestrictions);
-        if(result.successful){
-            currentRestrictions = result.restrictions;
-        } else {
-            logError(field, new TypeConstraintValidationMessages(
-                candidateRestrictions.getAllowedTypes().iterator().next(),
-                currentRestrictions.getAllowedTypes().iterator().next()));
-        }
-    }
-
-    private void logError(Field field, StandardValidationMessages message){
-        alerts.add(new ValidationAlert(
-            Criticality.ERROR,
-            message,
-            validationType,
-            field));
+        currentRestrictions = merger.merge(currentRestrictions, candidateRestrictions);
     }
 
     @Override

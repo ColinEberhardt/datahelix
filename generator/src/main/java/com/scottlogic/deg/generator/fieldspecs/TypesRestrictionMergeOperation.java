@@ -1,7 +1,5 @@
 package com.scottlogic.deg.generator.fieldspecs;
 
-import com.scottlogic.deg.generator.restrictions.DataTypeRestrictions;
-import com.scottlogic.deg.generator.restrictions.MergeResult;
 import com.scottlogic.deg.generator.restrictions.TypeRestrictions;
 import com.scottlogic.deg.generator.restrictions.TypeRestrictionsMerger;
 
@@ -12,20 +10,12 @@ public class TypesRestrictionMergeOperation implements RestrictionMergeOperation
 
     @Override
     public Optional<FieldSpec> applyMergeOperation(FieldSpec left, FieldSpec right, FieldSpec merging) {
-        MergeResult<TypeRestrictions> mergeResult = typeRestrictionsMerger.merge(
+        TypeRestrictions mergeResult = typeRestrictionsMerger.merge(
             left.getTypeRestrictions(),
             right.getTypeRestrictions());
 
-        if (!mergeResult.successful) {
-            return Optional.empty();
-        }
-
-        TypeRestrictions restrictions = mergeResult.restrictions != null
-            ? mergeResult.restrictions
-            : DataTypeRestrictions.ALL_TYPES_PERMITTED;
-
         return Optional.of(merging.withTypeRestrictions(
-            restrictions,
+            mergeResult,
             FieldSpecSource.fromFieldSpecs(left, right)));
     }
 }

@@ -9,7 +9,5 @@ public interface TypeRestrictions {
 
     boolean isTypeAllowed(IsOfTypeConstraint.Types type);
 
-    TypeRestrictions intersect(TypeRestrictions other);
-
     Set<IsOfTypeConstraint.Types> getAllowedTypes();
 }
