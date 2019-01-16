@@ -92,7 +92,7 @@ class FieldSpecValueGeneratorTests {
                 }},
                 fieldSpecSource)
             .withTypeRestrictions(
-                new DataTypeRestrictions(Collections.singletonList(
+                new TypeRestrictions(Collections.singletonList(
                     IsOfTypeConstraint.Types.NUMERIC
                 )),
                 fieldSpecSource)
@@ -153,7 +153,7 @@ class FieldSpecValueGeneratorTests {
         FieldSpec fieldSpec = FieldSpec.Empty
             .withNullRestrictions(notNull, fieldSpecSource)
             .withTypeRestrictions(
-                new DataTypeRestrictions(
+                new TypeRestrictions(
                     Collections.singletonList(
                         IsOfTypeConstraint.Types.STRING
                     )
@@ -214,7 +214,7 @@ class FieldSpecValueGeneratorTests {
                 }},
                 fieldSpecSource)
             .withTypeRestrictions(
-                new DataTypeRestrictions(
+                new TypeRestrictions(
                     Collections.singletonList(
                         IsOfTypeConstraint.Types.STRING
                     )
@@ -325,7 +325,7 @@ class FieldSpecValueGeneratorTests {
                 }},
                 fieldSpecSource)
             .withTypeRestrictions(
-                new DataTypeRestrictions(
+                new TypeRestrictions(
                     Collections.singletonList(IsOfTypeConstraint.Types.NUMERIC)
                 ),
                 fieldSpecSource);

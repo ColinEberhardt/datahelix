@@ -115,12 +115,12 @@ public class FieldSpecFactory {
         final TypeRestrictions typeRestrictions;
 
         if (negate) {
-            typeRestrictions = new DataTypeRestrictions(
+            typeRestrictions = new TypeRestrictions(
                 Arrays.stream(IsOfTypeConstraint.Types.values())
                     .filter(type -> type != constraint.requiredType)
                     .collect(Collectors.toSet()));
         } else {
-            typeRestrictions = DataTypeRestrictions.createFromWhiteList(constraint.requiredType);
+            typeRestrictions = TypeRestrictions.createFromWhiteList(constraint.requiredType);
         }
 
         return FieldSpec.Empty.withTypeRestrictions(

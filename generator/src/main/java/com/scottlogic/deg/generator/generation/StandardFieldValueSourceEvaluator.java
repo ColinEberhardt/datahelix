@@ -49,7 +49,7 @@ public class StandardFieldValueSourceEvaluator implements FieldValueSourceEvalua
 
         TypeRestrictions typeRestrictions = fieldSpec.getTypeRestrictions() != null
             ? fieldSpec.getTypeRestrictions()
-            : DataTypeRestrictions.ALL_TYPES_PERMITTED;
+            : TypeRestrictions.ALL_TYPES_PERMITTED;
 
         if (typeRestrictions.isTypeAllowed(IsOfTypeConstraint.Types.NUMERIC)) {
             NumericRestrictions restrictions = fieldSpec.getNumericRestrictions() == null

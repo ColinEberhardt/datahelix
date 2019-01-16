@@ -5,13 +5,13 @@ import java.util.stream.Collectors;
 public class TypeRestrictionsMerger {
     public TypeRestrictions merge(TypeRestrictions left, TypeRestrictions right) {
         if (left == null && right == null)
-            return DataTypeRestrictions.ALL_TYPES_PERMITTED;
+            return TypeRestrictions.ALL_TYPES_PERMITTED;
         if (left == null)
             return right;
         if (right == null)
             return left;
 
-        return new DataTypeRestrictions(
+        return new TypeRestrictions(
             left.getAllowedTypes().stream()
                 .filter(right.getAllowedTypes()::contains)
                 .collect(Collectors.toList()));
