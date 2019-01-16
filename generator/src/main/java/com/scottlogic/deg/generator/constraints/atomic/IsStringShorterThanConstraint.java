@@ -1,6 +1,7 @@
 package com.scottlogic.deg.generator.constraints.atomic;
 
 import com.scottlogic.deg.generator.Field;
+import com.scottlogic.deg.generator.constraints.StringLength;
 import com.scottlogic.deg.generator.inputs.validation.ProfileVisitor;
 import com.scottlogic.deg.generator.inputs.validation.VisitableProfileElement;
 import com.scottlogic.deg.generator.inputs.RuleInformation;
@@ -8,20 +9,32 @@ import com.scottlogic.deg.generator.inputs.RuleInformation;
 import java.util.Objects;
 import java.util.Set;
 
-public class IsStringShorterThanConstraint implements AtomicConstraint, VisitableProfileElement {
+public class IsStringShorterThanConstraint implements AtomicConstraint, VisitableProfileElement, StringLengthConstraint {
     public final Field field;
     private final Set<RuleInformation> rules;
     public final int referenceValue;
 
     public IsStringShorterThanConstraint(Field field, int referenceValue, Set<RuleInformation> rules) {
-        if (referenceValue < 0){
+        if (referenceValue < 1){
             throw new IllegalArgumentException("Cannot create an IsStringShorterThanConstraint for field '" +
-                field.name + "' with a a negative length.");
+                field.name + "' with a negative length.");
         }
 
         this.referenceValue = referenceValue;
         this.field = field;
         this.rules = rules;
+    }
+
+    @Override
+    public AtomicConstraint negate(){
+        return new IsStringLongerThanConstraint(field, referenceValue - 1, rules);
+    }
+
+    @Override
+    public StringLength getStringLength() {
+       StringLength s = new StringLength();
+        s.shorterThan = referenceValue;
+        return s;
     }
 
     @Override

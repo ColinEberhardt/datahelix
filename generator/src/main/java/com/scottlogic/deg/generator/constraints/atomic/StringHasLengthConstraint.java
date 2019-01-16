@@ -1,12 +1,14 @@
 package com.scottlogic.deg.generator.constraints.atomic;
 
 import com.scottlogic.deg.generator.Field;
+import com.scottlogic.deg.generator.constraints.StringLength;
 import com.scottlogic.deg.generator.inputs.RuleInformation;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
-public class StringHasLengthConstraint implements AtomicConstraint {
+public class StringHasLengthConstraint implements AtomicConstraint, StringLengthConstraint {
     public final Field field;
     public final int referenceValue;
     private final Set<RuleInformation> rules;
@@ -14,12 +16,24 @@ public class StringHasLengthConstraint implements AtomicConstraint {
     public StringHasLengthConstraint(Field field, int referenceValue, Set<RuleInformation> rules) {
         if (referenceValue < 0){
             throw new IllegalArgumentException("Cannot create an StringHasLengthConstraint for field '" +
-                field.name + "' with a a negative length.");
+                field.name + "' with a negative length.");
         }
 
         this.rules = rules;
         this.referenceValue = referenceValue;
         this.field = field;
+    }
+
+    @Override
+    public AtomicConstraint negate(){
+        return new NotStringHasLengthConstraint(field, referenceValue + 1, rules);
+    }
+
+    @Override
+    public StringLength getStringLength() {
+        StringLength s = new StringLength();
+        s.lengthIs = Optional.of(referenceValue);
+        return s;
     }
 
     @Override

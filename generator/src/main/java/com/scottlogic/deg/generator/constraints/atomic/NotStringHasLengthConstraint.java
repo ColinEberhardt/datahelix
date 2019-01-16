@@ -2,44 +2,42 @@ package com.scottlogic.deg.generator.constraints.atomic;
 
 import com.scottlogic.deg.generator.Field;
 import com.scottlogic.deg.generator.constraints.StringLength;
-import com.scottlogic.deg.generator.inputs.validation.ProfileVisitor;
-import com.scottlogic.deg.generator.inputs.validation.VisitableProfileElement;
 import com.scottlogic.deg.generator.inputs.RuleInformation;
 
 import java.util.Objects;
 import java.util.Set;
 
-public class IsStringLongerThanConstraint implements AtomicConstraint, VisitableProfileElement, StringLengthConstraint {
+public class NotStringHasLengthConstraint implements AtomicConstraint, StringLengthConstraint {
     public final Field field;
-    private final Set<RuleInformation> rules;
     public final int referenceValue;
+    private final Set<RuleInformation> rules;
 
-    public IsStringLongerThanConstraint(Field field, int referenceValue, Set<RuleInformation> rules) {
+    public NotStringHasLengthConstraint(Field field, int referenceValue, Set<RuleInformation> rules) {
         if (referenceValue < 0){
-            throw new IllegalArgumentException("Cannot create an IsStringLongerThanConstraint for field '" +
-                field.name + "' with a a negative length.");
+            throw new IllegalArgumentException("Cannot create a NotStringHasLengthConstraint for field '" +
+                field.name + "' with a negative length.");
         }
 
+        this.rules = rules;
         this.referenceValue = referenceValue;
         this.field = field;
-        this.rules = rules;
     }
 
     @Override
     public AtomicConstraint negate(){
-        return new IsStringShorterThanConstraint(field, referenceValue + 1, rules);
+        return new StringHasLengthConstraint(field, referenceValue + 1, rules);
     }
 
     @Override
     public StringLength getStringLength() {
         StringLength s = new StringLength();
-        s.longerThan = referenceValue;
+        s.lengthIsNot.add(referenceValue);
         return s;
     }
 
     @Override
-    public String toDotLabel(){
-        return String.format("%s length > %s", field.name, referenceValue);
+    public String toDotLabel() {
+        return String.format("%s length = not %s", field.name, referenceValue);
     }
 
     @Override
@@ -54,7 +52,7 @@ public class IsStringLongerThanConstraint implements AtomicConstraint, Visitable
             return o.equals(this);
         }
         if (o == null || getClass() != o.getClass()) return false;
-        IsStringLongerThanConstraint constraint = (IsStringLongerThanConstraint) o;
+        NotStringHasLengthConstraint constraint = (NotStringHasLengthConstraint) o;
         return Objects.equals(field, constraint.field) && Objects.equals(referenceValue, constraint.referenceValue);
     }
 
@@ -64,12 +62,7 @@ public class IsStringLongerThanConstraint implements AtomicConstraint, Visitable
     }
 
     @Override
-    public String toString() { return String.format("`%s` length > %d", field.name, referenceValue); }
-
-    @Override
-    public void accept(ProfileVisitor visitor) {
-        visitor.visit(this);
-    }
+    public String toString() { return String.format("`%s` length = not %s", field.name, referenceValue); }
 
     @Override
     public Set<RuleInformation> getRules() {
@@ -78,6 +71,6 @@ public class IsStringLongerThanConstraint implements AtomicConstraint, Visitable
 
     @Override
     public AtomicConstraint withRules(Set<RuleInformation> rules) {
-        return new IsStringLongerThanConstraint(this.field, this.referenceValue, rules);
+        return new StringHasLengthConstraint(this.field, this.referenceValue, rules);
     }
 }
