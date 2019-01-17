@@ -14,15 +14,19 @@ import com.scottlogic.deg.generator.outputs.TestCaseGenerationResult;
 import com.scottlogic.deg.generator.outputs.targets.DirectoryOutputTarget;
 import com.scottlogic.deg.generator.outputs.targets.FileOutputTarget;
 import com.scottlogic.deg.generator.outputs.targets.OutputTarget;
+import com.scottlogic.deg.generator.violations.ViolationFilter;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public abstract class GenerationEngine {
     private final DecisionTreeFactory decisionTreeGenerator;
+    private final ViolationFilter violationFilter;
     private final DataGenerator dataGenerator;
     private final OutputTarget outputter;
 
@@ -30,10 +34,12 @@ public abstract class GenerationEngine {
     protected GenerationEngine(
         OutputTarget outputter,
         DataGenerator dataGenerator,
-        DecisionTreeFactory decisionTreeGenerator) {
+        DecisionTreeFactory decisionTreeGenerator,
+        ViolationFilter violationFilter) {
         this.outputter = outputter;
         this.dataGenerator = dataGenerator;
         this.decisionTreeGenerator = decisionTreeGenerator;
+        this.violationFilter = violationFilter;
     }
 
     void generateDataSet(Profile profile, GenerationConfig config) throws IOException {
@@ -45,6 +51,7 @@ public abstract class GenerationEngine {
     public void generateTestCases(Profile profile, GenerationConfig config) throws IOException {
         final Stream<TestCaseDataSet> violatingCases = profile.rules
             .stream()
+            .filter(this.violationFilter::canViolateRule)
             .map(rule -> getViolationForRuleTestCaseDataSet(profile, config, rule));
 
         final TestCaseGenerationResult generationResult = new TestCaseGenerationResult(
@@ -83,10 +90,19 @@ public abstract class GenerationEngine {
     }
 
     private Rule violateRule(Rule rule) {
-        Constraint constraintToViolate =
-            rule.constraints.size() == 1
-                ? rule.constraints.iterator().next()
-                : new AndConstraint(rule.constraints);
+        Set<Constraint> constraintsToViolate = rule.constraints
+            .stream()
+            .filter(this.violationFilter::canViolateConstraint)
+            .collect(Collectors.toSet());
+
+        Set<Constraint> constraintstoMaintain = rule.constraints
+            .stream()
+            .filter(c -> !this.violationFilter.canViolateConstraint(c))
+            .collect(Collectors.toSet());
+
+        if (constraintsToViolate.isEmpty()){
+            return rule; //nothing can be violated
+        }
 
         //This will in effect produce the following constraint: // VIOLATE(AND(X, Y, Z)) reduces to
         //   OR(
@@ -94,7 +110,22 @@ public abstract class GenerationEngine {
         //     AND(X, VIOLATE(Y), Z),
         //     AND(X, Y, VIOLATE(Z)))
         // See ProfileDecisionTreeFactory.convertConstraint(ViolateConstraint)
-        ViolateConstraint violatedConstraint = new ViolateConstraint(constraintToViolate);
-        return new Rule(rule.rule, Collections.singleton(violatedConstraint));
+        ViolateConstraint violatedConstraints = new ViolateConstraint(constraintsToViolate.size() == 1
+            ? constraintsToViolate.iterator().next()
+            : new AndConstraint(constraintsToViolate));
+
+        if (constraintstoMaintain.isEmpty()){
+            return new Rule(rule.rule, Collections.singleton(violatedConstraints));
+        }
+
+        Constraint maintainedConstraints = constraintstoMaintain.size() == 1
+            ? constraintstoMaintain.iterator().next()
+            : new AndConstraint(constraintstoMaintain);
+
+        AndConstraint unviolatedAndViolatedConstraints = new AndConstraint(
+            Arrays.asList(
+                maintainedConstraints,
+                violatedConstraints));
+        return new Rule(rule.rule, Collections.singleton(unviolatedAndViolatedConstraints));
     }
 }

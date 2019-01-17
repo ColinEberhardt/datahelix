@@ -17,6 +17,8 @@ import com.scottlogic.deg.generator.inputs.validation.reporters.SystemOutProfile
 import com.scottlogic.deg.generator.outputs.dataset_writers.DataSetWriter;
 import com.scottlogic.deg.generator.outputs.targets.DirectoryOutputTarget;
 import com.scottlogic.deg.generator.outputs.targets.FileOutputTarget;
+import com.scottlogic.deg.generator.violations.ViolateEverythingFilter;
+import com.scottlogic.deg.generator.violations.ViolationFilter;
 import com.scottlogic.deg.generator.walker.*;
 import com.scottlogic.deg.generator.walker.reductive.IterationVisualiser;
 import com.scottlogic.deg.generator.walker.reductive.NoOpIterationVisualiser;
@@ -60,6 +62,7 @@ public class IoCContainer extends AbstractModule {
         bind(DecisionTreeWalker.class).annotatedWith(Names.named("cartesian")).to(CartesianProductDecisionTreeWalker.class);
         bind(DecisionTreeWalker.class).annotatedWith(Names.named("reductive")).to(ReductiveDecisionTreeWalker.class);
         bind(DecisionTreeWalker.class).annotatedWith(Names.named("routed")).to(DecisionTreeRoutesTreeWalker.class);
+        bind(ViolationFilter.class).to(ViolateEverythingFilter.class);
     }
 
     private void bindAllCommandLineTypes() {

@@ -15,6 +15,7 @@ import com.scottlogic.deg.generator.inputs.validation.reporters.NoopProfileValid
 import com.scottlogic.deg.generator.outputs.GeneratedObject;
 import com.scottlogic.deg.generator.outputs.TestCaseGenerationResult;
 import com.scottlogic.deg.generator.outputs.targets.OutputTarget;
+import com.scottlogic.deg.generator.violations.ViolateEverythingFilter;
 import com.scottlogic.deg.generator.violations.ViolationFilter;
 import com.scottlogic.deg.generator.walker.DecisionTreeWalkerFactory;
 import org.junit.Assert;
@@ -79,7 +80,8 @@ class ExampleProfilesTests {
                             new RelatedFieldTreePartitioner(),
                             new MostProlificConstraintOptimiser(),
                             new NoopDataGeneratorMonitor()),
-                        new ProfileDecisionTreeFactory()),
+                        new ProfileDecisionTreeFactory(),
+                        new ViolateEverythingFilter()),
                     profileFile);
             });
 
