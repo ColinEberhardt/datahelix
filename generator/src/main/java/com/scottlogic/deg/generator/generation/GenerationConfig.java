@@ -76,6 +76,22 @@ public class GenerationConfig {
         }
     }
 
+    public enum DataLimitationType {
+        NONE(Constants.DataLimitationTypes.NONE),
+        VALUES(Constants.DataLimitationTypes.VALUES);
+
+        private final String text;
+
+        DataLimitationType(String text){
+            this.text = text;
+        }
+
+        @Override
+        public String toString() {
+            return text;
+        }
+    }
+
     public enum TreeWalkerType {
         CARTESIAN_PRODUCT(Constants.WalkerTypes.CARTESIAN_PRODUCT),
         ROUTED(Constants.WalkerTypes.ROUTED),
@@ -133,6 +149,11 @@ public class GenerationConfig {
             public static final String RANDOM = "RANDOM";
 
             public static final String DEFAULT = INTERESTING;
+        }
+
+        public static class DataLimitationTypes{
+            public static final String NONE = "";
+            public static final String VALUES = "VALUES";
         }
 
         public static final long DEFAULT_MAX_ROWS = 10_000_000;
