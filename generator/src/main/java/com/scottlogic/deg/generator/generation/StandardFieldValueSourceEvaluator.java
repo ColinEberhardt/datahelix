@@ -2,7 +2,6 @@ package com.scottlogic.deg.generator.generation;
 
 import com.scottlogic.deg.generator.constraints.atomic.IsOfTypeConstraint;
 import com.scottlogic.deg.generator.fieldspecs.FieldSpec;
-import com.scottlogic.deg.generator.fieldspecs.FieldSpecSource;
 import com.scottlogic.deg.generator.generation.field_value_sources.*;
 import com.scottlogic.deg.generator.restrictions.*;
 
