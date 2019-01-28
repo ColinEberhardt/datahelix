@@ -15,6 +15,7 @@ public class GenerationConfig {
     private final CombinationStrategyType combinationStrategy;
     private final long maxRows;
     private final boolean validateProfile;
+    private final DataLimitationType dataLimitingType;
 
     @Inject
     public GenerationConfig(GenerationConfigSource source) {
@@ -23,6 +24,7 @@ public class GenerationConfig {
         this.combinationStrategy = source.getCombinationStrategyType();
         this.maxRows = source.getMaxRows();
         this.validateProfile = source.getValidateProfile();
+        this.dataLimitingType = source.getDataLimitingType();
     }
 
     public DataGenerationType getDataGenerationType() {
@@ -57,6 +59,10 @@ public class GenerationConfig {
         }
 
         return new NoopProfileValidator();
+    }
+
+    public DataLimitationType getDataLimitingType() {
+        return dataLimitingType;
     }
 
     public enum DataGenerationType {

@@ -73,6 +73,18 @@ public class GenerateCommandLine extends CommandLineBase implements GenerationCo
         description = "Defines whether to generate violating data")
     private boolean violateProfile;
 
+    @CommandLine.Option(names = {"-l", "--l", "--limit-rows-by"},
+        description = "Specifies the strategy for limiting the number of rows.",
+        defaultValue = GenerationConfig.Constants.DataLimitationTypes.NONE,
+        hidden = true)
+    @SuppressWarnings("unused")
+    private GenerationConfig.DataLimitationType dataLimitationType;
+
+    @Override
+    public GenerationConfig.DataLimitationType getDataLimitingType() {
+        return dataLimitationType;
+    }
+    
     @Override
     public boolean shouldDoPartitioning() {
         return !this.dontPartitionTrees;

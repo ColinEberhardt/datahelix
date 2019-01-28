@@ -7,6 +7,8 @@ import com.scottlogic.deg.generator.generation.databags.DataBagSource;
 
 import java.util.stream.Stream;
 
+import static com.scottlogic.deg.generator.generation.GenerationConfig.DataLimitationType.VALUES;
+
 public class FieldSpecValueGeneratorFactory {
     private final FieldValueSourceEvaluator evaluator;
 
@@ -34,8 +36,16 @@ public class FieldSpecValueGeneratorFactory {
 
         @Override
         public Stream<DataBag> generate(GenerationConfig generationConfig) {
-            return new FieldSpecValueGenerator(generationConfig, this.evaluator)
-                .generate(this.field, this.fieldSpec);
+            return new FieldSpecValueGenerator(generationConfig, getEvaluatorToUse(generationConfig))
+                .generate(field, fieldSpec);
+        }
+
+        private FieldValueSourceEvaluator getEvaluatorToUse(GenerationConfig generationConfig) {
+            if (generationConfig.getDataLimitingType() == VALUES) {
+                return new ValueLimitingFieldValueSourceEvaluator();
+            }
+
+            return evaluator;
         }
     }
 }

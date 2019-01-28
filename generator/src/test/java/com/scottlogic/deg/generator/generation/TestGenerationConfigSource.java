@@ -23,6 +23,11 @@ public class TestGenerationConfigSource implements GenerationConfigSource {
     }
 
     @Override
+    public GenerationConfig.DataLimitationType getDataLimitingType() {
+        return GenerationConfig.DataLimitationType.NONE;
+    }
+
+    @Override
     public GenerationConfig.DataGenerationType getGenerationType() {
         return this.generationType;
     }
