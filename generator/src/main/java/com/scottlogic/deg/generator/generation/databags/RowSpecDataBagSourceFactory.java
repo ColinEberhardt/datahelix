@@ -22,7 +22,7 @@ public class RowSpecDataBagSourceFactory {
 
     public DataBagSource createDataBagSource(RowSpec rowSpec){
         if (rowSpec instanceof ReductiveRowSpec){
-            return createReductiveDataBagSourceFor((ReductiveRowSpec) rowSpec);
+            return createReductiveDataBagSource((ReductiveRowSpec) rowSpec);
         }
 
         List<DataBagSource> fieldDataBagSources = new ArrayList<>(rowSpec.getFields().size());
@@ -37,52 +37,18 @@ public class RowSpecDataBagSourceFactory {
         return new MultiplexingDataBagSource(fieldDataBagSources.stream());
     }
 
-    private DataBagSource createReductiveDataBagSourceFor(ReductiveRowSpec rowSpec) {
+    private DataBagSource createReductiveDataBagSource(ReductiveRowSpec rowSpec) {
         List<DataBagSource> fieldDataBagSources = new ArrayList<>(rowSpec.getFields().size() - 1);
-        Field lastFixedField = rowSpec.lastFixedField;
 
         for (Field field: rowSpec.getFields()) {
-            if (field.equals(lastFixedField)){
-                continue;
-            }
-
             FieldSpec fieldSpec = rowSpec.getSpecForField(field);
-
             fieldDataBagSources.add(
-                new SingleValueDataBagSource(
-                    new StreamDataBagSource(generator.generate(field, fieldSpec))));
+                new StreamDataBagSource(
+                    generator.generate(field, fieldSpec).limit(1)
+                ));
         }
 
-        DataBagSource sourceWithoutLastFixedField = new MultiplexingDataBagSource(fieldDataBagSources.stream());
-        return new MultiplyingDataBagSource(
-            sourceWithoutLastFixedField,
-            new StreamDataBagSource(
-                generator.generate(
-                    lastFixedField,
-                    rowSpec.getSpecForField(lastFixedField))));
-    }
-
-    class MultiplyingDataBagSource implements DataBagSource {
-
-        private final DataBagSource fieldsForAllFixedFields;
-        private final DataBagSource valuesForLastField;
-
-        MultiplyingDataBagSource(DataBagSource fieldsForAllFixedFields, DataBagSource valuesForLastField) {
-            this.fieldsForAllFixedFields = fieldsForAllFixedFields;
-            this.valuesForLastField = valuesForLastField;
-        }
-
-        @Override
-        public Stream<DataBag> generate(GenerationConfig generationConfig) {
-            Stream<DataBag> valuesForLastField = this.valuesForLastField.generate(generationConfig);
-            DataBag singleValuePerField = this.fieldsForAllFixedFields
-                .generate(generationConfig)
-                .reduce(
-                    DataBag.empty,
-                    (prev, current) -> DataBag.merge(prev, current));
-
-            return valuesForLastField.map(lastFieldValue -> DataBag.merge(lastFieldValue, singleValuePerField));
-        }
+        return new MultiplexingDataBagSource(fieldDataBagSources.stream());
     }
 
     class StreamDataBagSource implements DataBagSource{
