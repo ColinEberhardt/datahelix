@@ -87,7 +87,7 @@ class ReductiveDecisionTreeReducerTests {
             fieldSpecFactory,
             fieldSpecMerger,
             simplifier);
-        FixedField field2FixedTo0 = new FixedField(field2, Stream.of(0), FieldSpec.Empty, nullMonitor);
+        FixedField field2FixedTo0 = new FixedField(field2, Stream.of(0), FieldSpec.Empty, nullMonitor, null);
         ReductiveState field2Fixed = initialState.with(field2FixedTo0);
         field2FixedTo0.getStream().iterator().next(); //move to the first value for field2, i.e. 0
 
@@ -116,7 +116,7 @@ class ReductiveDecisionTreeReducerTests {
             fieldSpecFactory,
             fieldSpecMerger,
             simplifier);
-        FixedField field1FixedTo1 = new FixedField(field1, Stream.of(1), FieldSpec.Empty, nullMonitor);
+        FixedField field1FixedTo1 = new FixedField(field1, Stream.of(1), FieldSpec.Empty, nullMonitor, null);
         ReductiveState field1Fixed = initialState.with(field1FixedTo1);
         field1FixedTo1.getStream().iterator().next(); //move to the first value for field1, i.e. 1
 
@@ -142,7 +142,7 @@ class ReductiveDecisionTreeReducerTests {
             fieldSpecFactory,
             fieldSpecMerger,
             simplifier);
-        FixedField field1FixedTo1 = new FixedField(field1, Stream.of(1), FieldSpec.Empty, nullMonitor);
+        FixedField field1FixedTo1 = new FixedField(field1, Stream.of(1), FieldSpec.Empty, nullMonitor, null);
         ReductiveState field1Fixed = initialState.with(field1FixedTo1);
         field1FixedTo1.getStream().iterator().next(); //move to the first value for field1, i.e. 1
 
@@ -175,7 +175,7 @@ class ReductiveDecisionTreeReducerTests {
             fieldSpecFactory,
             fieldSpecMerger,
             simplifier);
-        FixedField field2FixedTo0 = new FixedField(field2, Stream.of(0), FieldSpec.Empty, nullMonitor);
+        FixedField field2FixedTo0 = new FixedField(field2, Stream.of(0), FieldSpec.Empty, nullMonitor, null);
         ReductiveState field2Fixed = initialState.with(field2FixedTo0);
         field2FixedTo0.getStream().iterator().next(); //move to the first value for field2, i.e. 0
 
@@ -207,7 +207,7 @@ class ReductiveDecisionTreeReducerTests {
             fieldSpecFactory,
             fieldSpecMerger,
             simplifier);
-        FixedField field2FixedTo0 = new FixedField(field2, Stream.of(0), FieldSpec.Empty, nullMonitor);
+        FixedField field2FixedTo0 = new FixedField(field2, Stream.of(0), FieldSpec.Empty, nullMonitor, null);
         ReductiveState field2Fixed = initialState.with(field2FixedTo0);
         field2FixedTo0.getStream().iterator().next(); //move to the first value for field2, i.e. 0
 
@@ -256,7 +256,7 @@ class ReductiveDecisionTreeReducerTests {
             fieldSpecFactory,
             fieldSpecMerger,
             simplifier);
-        FixedField field1FixedTo1 = new FixedField(field1, Stream.of(1), FieldSpec.Empty, nullMonitor);
+        FixedField field1FixedTo1 = new FixedField(field1, Stream.of(1), FieldSpec.Empty, nullMonitor, null);
         ReductiveState field1Fixed = initialState.with(field1FixedTo1);
         field1FixedTo1.getStream().iterator().next(); //move to the first value for field1, i.e. 1
 
@@ -280,8 +280,8 @@ class ReductiveDecisionTreeReducerTests {
             fieldSpecFactory,
             fieldSpecMerger,
             simplifier);
-        FixedField field2FixedTo0 = new FixedField(field2, Stream.of(0), FieldSpec.Empty, nullMonitor);
-        FixedField field3FixedTo4 = new FixedField(field3, Stream.of(4), FieldSpec.Empty, nullMonitor);
+        FixedField field2FixedTo0 = new FixedField(field2, Stream.of(0), FieldSpec.Empty, nullMonitor, null);
+        FixedField field3FixedTo4 = new FixedField(field3, Stream.of(4), FieldSpec.Empty, nullMonitor, null);
         ReductiveState fields2And3Fixed = initialState.with(field2FixedTo0).with(field3FixedTo4);
         field2FixedTo0.getStream().iterator().next(); //move to the first value for field2, i.e. 0
         field3FixedTo4.getStream().iterator().next(); //move to the first value for field3, i.e. 4
@@ -314,7 +314,7 @@ class ReductiveDecisionTreeReducerTests {
             fieldSpecFactory,
             fieldSpecMerger,
             simplifier);
-        FixedField field3FixedTo3 = new FixedField(field3, Stream.of(3), FieldSpec.Empty, nullMonitor);
+        FixedField field3FixedTo3 = new FixedField(field3, Stream.of(3), FieldSpec.Empty, nullMonitor, null);
         ReductiveState field3Fixed = initialState.with(field3FixedTo3);
         field3FixedTo3.getStream().iterator().next(); //move to the first value for field3, i.e. 3
 
@@ -345,7 +345,7 @@ class ReductiveDecisionTreeReducerTests {
             fieldSpecFactory,
             fieldSpecMerger,
             simplifier);
-        FixedField field3FixedTo3 = new FixedField(field3, Collections.singletonList(null).stream(), FieldSpec.Empty, nullMonitor);
+        FixedField field3FixedTo3 = new FixedField(field3, Collections.singletonList(null).stream(), FieldSpec.Empty, nullMonitor, null);
         ReductiveState field3Fixed = initialState.with(field3FixedTo3);
         field3FixedTo3.getStream().iterator().next(); //move to the first value for field3, i.e. null
 
@@ -389,7 +389,7 @@ class ReductiveDecisionTreeReducerTests {
             fieldSpecFactory,
             fieldSpecMerger,
             simplifier);
-        FixedField field3FixedTo3 = new FixedField(field3, Stream.of(3), FieldSpec.Empty, nullMonitor);
+        FixedField field3FixedTo3 = new FixedField(field3, Stream.of(3), FieldSpec.Empty, nullMonitor, null);
         ReductiveState field3Fixed = initialState.with(field3FixedTo3);
         field3FixedTo3.getStream().iterator().next(); //move to the first value for field3, i.e. null
 
@@ -428,7 +428,7 @@ class ReductiveDecisionTreeReducerTests {
             fieldSpecFactory,
             fieldSpecMerger,
             simplifier);
-        FixedField field3FixedTo3 = new FixedField(field3, Collections.singletonList(null).stream(), FieldSpec.Empty, nullMonitor);
+        FixedField field3FixedTo3 = new FixedField(field3, Collections.singletonList(null).stream(), FieldSpec.Empty, nullMonitor, null);
         ReductiveState field3Fixed = initialState.with(field3FixedTo3);
         field3FixedTo3.getStream().iterator().next(); //move to the first value for field3, i.e. null
 

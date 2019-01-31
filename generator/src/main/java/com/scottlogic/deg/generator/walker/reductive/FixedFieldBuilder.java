@@ -49,11 +49,11 @@ public class FixedFieldBuilder {
                     Objects.toString(reductiveState.getUnfixedFields())));
         }
 
-        return createFixedFieldWithValues(fieldToFix, rootNode);
+        return createFixedFieldWithValues(fieldToFix, rootNode, reductiveState);
     }
 
     //for the given field get a stream of possible values
-    private FixedField createFixedFieldWithValues(Field field, ConstraintNode rootNode) {
+    private FixedField createFixedFieldWithValues(Field field, ConstraintNode rootNode, ReductiveState reductiveState) {
         //from the original tree, get all atomic constraints that match the given field
         Set<AtomicConstraint> constraintsForRootNode = rootNode.getAtomicConstraints()
             .stream()
@@ -68,11 +68,11 @@ public class FixedFieldBuilder {
             constraintsForDecisions)
             .orElse(FieldSpec.Empty);
 
-        //use the FieldSpecValueGenerator to emit all possible values given the generation mode, interesting or full-sequential
+        //use the StandardFieldSpecValueGenerator to emit all possible values given the generation mode, interesting or full-sequential
         Stream<Object> values = generator.generate(field, rootConstraintsFieldSpec)
             .map(dataBag -> dataBag.getValue(field));
 
-        return new FixedField(field, values, rootConstraintsFieldSpec, this.monitor);
+        return new FixedField(field, values, rootConstraintsFieldSpec, this.monitor, reductiveState);
     }
 
     private Set<AtomicConstraint> getAtomicConstraintsInDecisions(Field field, ConstraintNode rootNode) {

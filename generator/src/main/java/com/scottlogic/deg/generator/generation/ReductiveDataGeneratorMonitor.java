@@ -18,4 +18,5 @@ public interface ReductiveDataGeneratorMonitor extends DataGeneratorMonitor{
     void unableToStepFurther(ReductiveState reductiveState);
     void noValuesForField(ReductiveState reductiveState);
     void unableToEmitRowAsSomeFieldSpecsAreEmpty(ReductiveState reductiveState, Map<Field, FieldSpec> fieldSpecsPerField);
+    void atEndOfField(Field field, ReductiveState reductiveState);
 }

@@ -61,7 +61,7 @@ public class SystemOutDataGeneratorMonitor implements ReductiveDataGeneratorMoni
     public void rowSpecEmitted(FixedField lastFixedField, FieldSpec fieldSpecForValuesInLastFixedField, RowSpec rowSpecWithAllValuesForLastFixedField) {
         System.out.println(
             String.format(
-                "%s %s",
+                "%s: FieldSpec = %s",
                 lastFixedField.field.name,
                 fieldSpecForValuesInLastFixedField.toString()));
     }
@@ -102,6 +102,11 @@ public class SystemOutDataGeneratorMonitor implements ReductiveDataGeneratorMoni
                 "%d: Unable to emit row, some FieldSpec's are Empty: %s",
                 reductiveState.getFixedFieldsExceptLast().size(),
                 Objects.toString(emptyFieldSpecs)));
+    }
+
+    @Override
+    public void atEndOfField(Field field, ReductiveState reductiveState) {
+        System.out.println(String.format("%d: [%s] - end of stream", reductiveState.getFixedFieldsExceptLast().size(), field.name));
     }
 }
 

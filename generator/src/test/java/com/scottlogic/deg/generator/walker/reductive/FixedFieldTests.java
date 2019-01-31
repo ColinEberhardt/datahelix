@@ -21,7 +21,8 @@ class FixedFieldTests {
             new Field("Test"),
             Stream.of(new ArrayList<Object>() {{ add(null); }}),
             FieldSpec.Empty,
-            mock(ReductiveDataGeneratorMonitor.class)
+            mock(ReductiveDataGeneratorMonitor.class),
+            mock(ReductiveState.class)
         );
 
         // Stream must be collected to set the current value

@@ -31,4 +31,7 @@ public class NoopDataGeneratorMonitor implements ReductiveDataGeneratorMonitor {
 
     @Override
     public void unableToEmitRowAsSomeFieldSpecsAreEmpty(ReductiveState reductiveState, Map<Field, FieldSpec> fieldSpecsPerField) { }
+
+    @Override
+    public void atEndOfField(Field field, ReductiveState reductiveState) { }
 }

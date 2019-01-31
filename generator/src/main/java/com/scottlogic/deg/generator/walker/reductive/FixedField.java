@@ -7,9 +7,10 @@ import com.scottlogic.deg.generator.restrictions.NullRestrictions;
 import com.scottlogic.deg.generator.restrictions.Nullness;
 import com.scottlogic.deg.generator.restrictions.SetRestrictions;
 
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public class FixedField {
     private static final Object NOT_ITERATED = new NotIterated();
@@ -19,6 +20,7 @@ public class FixedField {
     private final Stream<Object> values;
     private final FieldSpec valuesFieldSpec;
     private final ReductiveDataGeneratorMonitor monitor;
+    final ReductiveState reductiveState;
 
     private Object current = NOT_ITERATED;
     private FieldSpec fieldSpec;
@@ -27,24 +29,28 @@ public class FixedField {
         Field field,
         Stream<Object> values,
         FieldSpec valuesFieldSpec,
-        ReductiveDataGeneratorMonitor monitor) {
+        ReductiveDataGeneratorMonitor monitor,
+        ReductiveState reductiveState) {
         this.field = field;
         this.values = values;
         this.valuesFieldSpec = valuesFieldSpec;
         this.monitor = monitor;
+        this.reductiveState = reductiveState;
     }
 
     public Stream<Object> getStream() {
-        return this.values
-            .peek(value -> {
-                this.current = value;
-                this.fieldSpec = null;
+        Iterator<Object> iterator = this.values.iterator();
+        MonitoringIterator<Object> monitoringIterator = new MonitoringIterator<>(field, iterator, monitor, (value) -> {
+            current = value;
+            fieldSpec = null;
+        }, reductiveState);
 
-                this.monitor.fieldFixedToValue(this.field, this.current);
-            });
+        return StreamSupport.stream(
+            Spliterators.spliteratorUnknownSize(monitoringIterator, Spliterator.ORDERED),
+            false);
     }
 
-    public FieldSpec getFieldSpecForValues(){
+    public FieldSpec getFieldSpecForValues(){ //TODO: need to check if this instance is ever used to produce values, if so then it needs to know about the filter
         return this.valuesFieldSpec;
     }
 
@@ -96,4 +102,38 @@ public class FixedField {
     }
 
     private static class NotIterated { }
+
+    class MonitoringIterator<T> implements Iterator<T> {
+        private final Field field;
+        private final Iterator<T> underlyingIterator;
+        private final ReductiveDataGeneratorMonitor monitor;
+        private final Consumer<T> valueChanged;
+        private ReductiveState reductiveState;
+
+        MonitoringIterator(Field field, Iterator<T> underlyingIterator, ReductiveDataGeneratorMonitor monitor, Consumer<T> valueChanged, ReductiveState reductiveState) {
+            this.field = field;
+            this.underlyingIterator = underlyingIterator;
+            this.monitor = monitor;
+            this.valueChanged = valueChanged;
+            this.reductiveState = reductiveState;
+        }
+
+        @Override
+        public boolean hasNext() {
+            boolean hasNext = underlyingIterator.hasNext();
+            if (!hasNext){
+                monitor.atEndOfField(field, reductiveState);
+            }
+
+            return hasNext;
+        }
+
+        @Override
+        public T next() {
+            T value = underlyingIterator.next();
+            monitor.fieldFixedToValue(field, value);
+            valueChanged.accept(value);
+            return value;
+        }
+    }
 }
