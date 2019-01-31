@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-class FieldSpecValueGeneratorTests {
+class StandardFieldSpecValueGeneratorTests {
     private final NullRestrictions notNull = new NullRestrictions(Nullness.MUST_NOT_BE_NULL);
     private final FieldSpecSource fieldSpecSource = FieldSpecSource.Empty;
 
@@ -57,7 +57,7 @@ class FieldSpecValueGeneratorTests {
                 GenerationConfig.TreeWalkerType.REDUCTIVE,
                 GenerationConfig.CombinationStrategyType.EXHAUSTIVE)
         );
-        FieldSpecValueGenerator fieldSpecFulfiller = new FieldSpecValueGenerator(config, new StandardFieldValueSourceEvaluator());
+        FieldSpecValueGenerator fieldSpecFulfiller = new StandardFieldSpecValueGenerator(config, new StandardFieldValueSourceEvaluator());
 
         final Set<DataBag> result = fieldSpecFulfiller.generate(new Field("First Field"), fieldSpec)
             .collect(Collectors.toSet());
@@ -120,7 +120,7 @@ class FieldSpecValueGeneratorTests {
                 GenerationConfig.TreeWalkerType.REDUCTIVE,
                 GenerationConfig.CombinationStrategyType.EXHAUSTIVE)
         );
-        FieldSpecValueGenerator fieldSpecFulfiller = new FieldSpecValueGenerator(generationConfig, new StandardFieldValueSourceEvaluator());
+        FieldSpecValueGenerator fieldSpecFulfiller = new StandardFieldSpecValueGenerator(generationConfig, new StandardFieldValueSourceEvaluator());
 
         final Set<DataBag> result = fieldSpecFulfiller.generate(new Field("First Field"), fieldSpec)
             .collect(Collectors.toSet());
@@ -183,7 +183,7 @@ class FieldSpecValueGeneratorTests {
                 GenerationConfig.TreeWalkerType.REDUCTIVE,
                 GenerationConfig.CombinationStrategyType.EXHAUSTIVE)
         );
-        FieldSpecValueGenerator fieldSpecFulfiller = new FieldSpecValueGenerator(generationConfig, new StandardFieldValueSourceEvaluator());
+        FieldSpecValueGenerator fieldSpecFulfiller = new StandardFieldSpecValueGenerator(generationConfig, new StandardFieldValueSourceEvaluator());
 
         final Set<DataBag> result = fieldSpecFulfiller.generate(new Field("First Field"), fieldSpec).collect(Collectors.toSet());
 
@@ -244,7 +244,7 @@ class FieldSpecValueGeneratorTests {
                 GenerationConfig.TreeWalkerType.REDUCTIVE,
                 GenerationConfig.CombinationStrategyType.EXHAUSTIVE)
         );
-        FieldSpecValueGenerator fieldSpecFulfiller = new FieldSpecValueGenerator(generationConfig, new StandardFieldValueSourceEvaluator());
+        FieldSpecValueGenerator fieldSpecFulfiller = new StandardFieldSpecValueGenerator(generationConfig, new StandardFieldValueSourceEvaluator());
 
         final Set<DataBag> result = fieldSpecFulfiller.generate(new Field("First Field"), fieldSpec).collect(Collectors.toSet());
 
@@ -288,7 +288,7 @@ class FieldSpecValueGeneratorTests {
                 GenerationConfig.TreeWalkerType.REDUCTIVE,
                 GenerationConfig.CombinationStrategyType.EXHAUSTIVE)
         );
-        FieldSpecValueGenerator fieldSpecFulfiller = new FieldSpecValueGenerator(generationConfig, new StandardFieldValueSourceEvaluator());
+        FieldSpecValueGenerator fieldSpecFulfiller = new StandardFieldSpecValueGenerator(generationConfig, new StandardFieldValueSourceEvaluator());
 
         final Set<DataBag> result = fieldSpecFulfiller.generate(new Field("First Field"), fieldSpec).collect(Collectors.toSet());
 
@@ -332,7 +332,7 @@ class FieldSpecValueGeneratorTests {
                 GenerationConfig.TreeWalkerType.REDUCTIVE,
                 GenerationConfig.CombinationStrategyType.EXHAUSTIVE)
         );
-        FieldSpecValueGenerator fieldSpecFulfiller = new FieldSpecValueGenerator(generationConfig, new StandardFieldValueSourceEvaluator());
+        FieldSpecValueGenerator fieldSpecFulfiller = new StandardFieldSpecValueGenerator(generationConfig, new StandardFieldValueSourceEvaluator());
 
         final Set<DataBag> result = fieldSpecFulfiller.generate(new Field("First Field"), fieldSpec).collect(Collectors.toSet());
 

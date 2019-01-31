@@ -91,7 +91,7 @@ class ExampleProfilesViolationTests {
                         new RelatedFieldTreePartitioner(),
                         new MostProlificConstraintOptimiser(),
                         new NoopDataGeneratorMonitor(),
-                        new RowSpecDataBagSourceFactory(new FieldSpecValueGenerator(config, new StandardFieldValueSourceEvaluator()))),
+                        new RowSpecDataBagSourceFactory(new StandardFieldSpecValueGenerator(config, new StandardFieldValueSourceEvaluator()))),
                     new ProfileDecisionTreeFactory());
                 ViolationGenerationEngine violationGenerationEngine = new ViolationGenerationEngine(null, engine, new ManifestWriter(), Collections.emptyList());
 

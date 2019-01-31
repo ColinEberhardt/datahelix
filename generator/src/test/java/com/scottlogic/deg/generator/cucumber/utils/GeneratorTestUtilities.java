@@ -103,7 +103,7 @@ public class GeneratorTestUtilities {
             new RelatedFieldTreePartitioner(),
             new NoopDecisionTreeOptimiser(),
             new NoopDataGeneratorMonitor(),
-            new RowSpecDataBagSourceFactory(new FieldSpecValueGenerator(config, new StandardFieldValueSourceEvaluator())));
+            new RowSpecDataBagSourceFactory(new StandardFieldSpecValueGenerator(config, new StandardFieldValueSourceEvaluator())));
 
         final Stream<GeneratedObject> dataSet = dataGenerator.generateData(profile, analysedProfile.getMergedTree(), config);
 
@@ -121,7 +121,7 @@ public class GeneratorTestUtilities {
             case REDUCTIVE:
                 NoopDataGeneratorMonitor monitor = new NoopDataGeneratorMonitor();
                 FixFieldStrategy fixFieldStrategy = new RankedConstraintFixFieldStrategy();
-                FieldSpecValueGenerator generator = new FieldSpecValueGenerator(config, new StandardFieldValueSourceEvaluator());
+                FieldSpecValueGenerator generator = new StandardFieldSpecValueGenerator(config, new StandardFieldValueSourceEvaluator());
 
                 return new ReductiveDecisionTreeWalker(
                     new NoOpIterationVisualiser(),
