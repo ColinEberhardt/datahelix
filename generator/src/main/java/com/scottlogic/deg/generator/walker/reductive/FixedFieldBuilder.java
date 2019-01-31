@@ -2,6 +2,7 @@ package com.scottlogic.deg.generator.walker.reductive;
 
 import com.google.inject.Inject;
 import com.scottlogic.deg.generator.Field;
+import com.scottlogic.deg.generator.FlatMappingSpliterator;
 import com.scottlogic.deg.generator.constraints.atomic.AtomicConstraint;
 import com.scottlogic.deg.generator.constraints.atomic.NotConstraint;
 import com.scottlogic.deg.generator.decisiontree.ConstraintNode;
@@ -13,9 +14,7 @@ import com.scottlogic.deg.generator.generation.ReductiveDataGeneratorMonitor;
 import com.scottlogic.deg.generator.reducer.ConstraintReducer;
 import com.scottlogic.deg.generator.walker.reductive.field_selection_strategy.FixFieldStrategy;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -71,6 +70,16 @@ public class FixedFieldBuilder {
         //use the StandardFieldSpecValueGenerator to emit all possible values given the generation mode, interesting or full-sequential
         Stream<Object> values = generator.generate(field, rootConstraintsFieldSpec)
             .map(dataBag -> dataBag.getValue(field));
+
+        if (constraintsForRootNode.isEmpty() && !constraintsForDecisions.isEmpty()){
+            values = FlatMappingSpliterator.flatMap(
+                constraintsForDecisions
+                    .stream()
+                    .map(atomicConstraint -> this.constraintReducer.reduceConstraintsToFieldSpec(Collections.singletonList(atomicConstraint)))
+                    .filter(Optional::isPresent)
+                    .map(Optional::get),
+                mustContainFieldSpec -> generator.generate(field, mustContainFieldSpec).map(db -> db.getValue(field)));
+        }
 
         return new FixedField(field, values, rootConstraintsFieldSpec, this.monitor, reductiveState);
     }
