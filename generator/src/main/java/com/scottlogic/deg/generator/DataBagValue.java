@@ -33,5 +33,10 @@ public class DataBagValue {
     public int hashCode() {
         return Objects.hash(value, format);
     }
+
+    @Override
+    public String toString() {
+        return value == null ? null : value.toString();
+    }
 }
 

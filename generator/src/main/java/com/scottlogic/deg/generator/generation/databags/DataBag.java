@@ -97,4 +97,13 @@ public class DataBag {
             return new DataBag(this.fieldToValue);
         }
     }
+
+    public String toString(){
+        if (fieldToValue.size() == 1){
+            Field field = fieldToValue.keySet().iterator().next();
+            return String.format("%s = %s", field, fieldToValue.get(field));
+        }
+
+        return super.toString();
+    }
 }
