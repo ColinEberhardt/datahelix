@@ -6,6 +6,9 @@ import com.scottlogic.deg.generator.fieldspecs.FieldSpec;
 import com.scottlogic.deg.generator.fieldspecs.ReductiveRowSpec;
 import com.scottlogic.deg.generator.fieldspecs.RowSpec;
 import com.scottlogic.deg.generator.generation.FieldSpecValueGenerator;
+import com.scottlogic.deg.generator.generation.ReductivePinningCoordinator;
+import com.scottlogic.deg.generator.generation.ReductivePinningFieldCache;
+import com.scottlogic.deg.generator.generation.StandardFieldSpecValueGenerator;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +30,11 @@ class RowSpecDataBagSourceFactoryTests {
         Map<Field, FieldSpec> map = new HashMap<Field, FieldSpec>() {{ put(field, fieldSpec); }};
         RowSpec rowSpec = new RowSpec(fields, map);
         FieldSpecValueGenerator generatorFactory = mock(FieldSpecValueGenerator.class);
-        RowSpecDataBagSourceFactory factory = new RowSpecDataBagSourceFactory(generatorFactory);
+        StandardFieldSpecValueGenerator standardGeneratorFactory = mock(StandardFieldSpecValueGenerator.class);
+        RowSpecDataBagSourceFactory factory = new RowSpecDataBagSourceFactory(
+            generatorFactory,
+            standardGeneratorFactory,
+            new ReductivePinningCoordinator(new ReductivePinningFieldCache()));
 
         DataBagSource result = factory.createDataBagSource(rowSpec);
 
@@ -40,7 +47,11 @@ class RowSpecDataBagSourceFactoryTests {
         Map<Field, FieldSpec> map = new HashMap<Field, FieldSpec>() {{ put(field, fieldSpec); }};
         RowSpec rowSpec = new RowSpec(fields, map);
         FieldSpecValueGenerator generatorFactory = mock(FieldSpecValueGenerator.class);
-        RowSpecDataBagSourceFactory factory = new RowSpecDataBagSourceFactory(generatorFactory);
+        StandardFieldSpecValueGenerator standardGeneratorFactory = mock(StandardFieldSpecValueGenerator.class);
+        RowSpecDataBagSourceFactory factory = new RowSpecDataBagSourceFactory(
+            generatorFactory,
+            standardGeneratorFactory,
+            new ReductivePinningCoordinator(new ReductivePinningFieldCache()));
 
         factory.createDataBagSource(rowSpec);
 
@@ -53,7 +64,11 @@ class RowSpecDataBagSourceFactoryTests {
         Map<Field, FieldSpec> map = new HashMap<Field, FieldSpec>() {{ put(field, fieldSpec); }};
         ReductiveRowSpec rowSpec = new ReductiveRowSpec(fields, map, field);
         FieldSpecValueGenerator generatorFactory = mock(FieldSpecValueGenerator.class);
-        RowSpecDataBagSourceFactory factory = new RowSpecDataBagSourceFactory(generatorFactory);
+        StandardFieldSpecValueGenerator standardGeneratorFactory = mock(StandardFieldSpecValueGenerator.class);
+        RowSpecDataBagSourceFactory factory = new RowSpecDataBagSourceFactory(
+            generatorFactory,
+            standardGeneratorFactory,
+            new ReductivePinningCoordinator(new ReductivePinningFieldCache()));
 
         DataBagSource result = factory.createDataBagSource(rowSpec);
 
@@ -66,7 +81,11 @@ class RowSpecDataBagSourceFactoryTests {
         Map<Field, FieldSpec> map = new HashMap<Field, FieldSpec>() {{ put(field, fieldSpec); }};
         ReductiveRowSpec rowSpec = new ReductiveRowSpec(fields, map, field);
         FieldSpecValueGenerator generatorFactory = mock(FieldSpecValueGenerator.class);
-        RowSpecDataBagSourceFactory factory = new RowSpecDataBagSourceFactory(generatorFactory);
+        StandardFieldSpecValueGenerator standardGeneratorFactory = mock(StandardFieldSpecValueGenerator.class);
+        RowSpecDataBagSourceFactory factory = new RowSpecDataBagSourceFactory(
+            generatorFactory,
+            standardGeneratorFactory,
+            new ReductivePinningCoordinator(new ReductivePinningFieldCache()));
 
         factory.createDataBagSource(rowSpec);
 

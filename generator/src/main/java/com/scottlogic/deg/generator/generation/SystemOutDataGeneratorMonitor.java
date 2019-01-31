@@ -61,7 +61,7 @@ public class SystemOutDataGeneratorMonitor implements ReductiveDataGeneratorMoni
     public void rowSpecEmitted(FixedField lastFixedField, FieldSpec fieldSpecForValuesInLastFixedField, RowSpec rowSpecWithAllValuesForLastFixedField) {
         System.out.println(
             String.format(
-                "%s: FieldSpec = %s",
+                "[%s]: FieldSpec = %s",
                 lastFixedField.field.name,
                 fieldSpecForValuesInLastFixedField.toString()));
     }

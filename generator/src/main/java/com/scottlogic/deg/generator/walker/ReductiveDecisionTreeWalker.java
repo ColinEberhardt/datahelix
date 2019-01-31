@@ -7,6 +7,7 @@ import com.scottlogic.deg.generator.decisiontree.DecisionTree;
 import com.scottlogic.deg.generator.decisiontree.reductive.ReductiveConstraintNode;
 import com.scottlogic.deg.generator.generation.ReductiveDataGeneratorMonitor;
 import com.scottlogic.deg.generator.fieldspecs.RowSpec;
+import com.scottlogic.deg.generator.generation.ReductivePinningCoordinator;
 import com.scottlogic.deg.generator.walker.reductive.*;
 
 import java.io.IOException;
@@ -22,6 +23,7 @@ public class ReductiveDecisionTreeWalker implements DecisionTreeWalker {
     private final FixedFieldBuilder fixedFieldBuilder;
     private final ReductiveDataGeneratorMonitor monitor;
     private final ReductiveRowSpecGenerator reductiveRowSpecGenerator;
+    private final ReductivePinningCoordinator pinningCoordinator;
 
     @Inject
     public ReductiveDecisionTreeWalker(
@@ -29,16 +31,20 @@ public class ReductiveDecisionTreeWalker implements DecisionTreeWalker {
         FixedFieldBuilder fixedFieldBuilder,
         ReductiveDataGeneratorMonitor monitor,
         ReductiveDecisionTreeReducer treeReducer,
-        ReductiveRowSpecGenerator reductiveRowSpecGenerator) {
+        ReductiveRowSpecGenerator reductiveRowSpecGenerator,
+        ReductivePinningCoordinator pinningCoordinator) {
         this.iterationVisualiser = iterationVisualiser;
         this.fixedFieldBuilder = fixedFieldBuilder;
         this.monitor = monitor;
         this.treeReducer = treeReducer;
         this.reductiveRowSpecGenerator = reductiveRowSpecGenerator;
+        this.pinningCoordinator = pinningCoordinator;
     }
 
     /* initialise the walker with a set (ReductiveState) of unfixed fields */
     public Stream<RowSpec> walk(DecisionTree tree) {
+        pinningCoordinator.generationStarting(tree.fields);
+
         ConstraintNode rootNode = tree.getRootNode();
         ReductiveState initialState = new ReductiveState(tree.fields);
 

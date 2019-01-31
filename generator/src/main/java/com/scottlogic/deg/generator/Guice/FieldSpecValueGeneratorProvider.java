@@ -12,11 +12,17 @@ public class FieldSpecValueGeneratorProvider implements Provider<FieldSpecValueG
 
     private final GenerationConfigSource configSource;
     private final StandardFieldSpecValueGenerator standardEvaluator;
+    private final ReductivePinningFieldSpecValueGenerator reductivePinningGenerator;
 
     @Inject
-    public FieldSpecValueGeneratorProvider(GenerationConfigSource configSource, StandardFieldSpecValueGenerator standardEvaluator) {
+    public FieldSpecValueGeneratorProvider(
+        GenerationConfigSource configSource,
+        StandardFieldSpecValueGenerator standardEvaluator,
+        ReductivePinningFieldSpecValueGenerator reductivePinningGenerator) {
+
         this.configSource = configSource;
         this.standardEvaluator = standardEvaluator;
+        this.reductivePinningGenerator = reductivePinningGenerator;
     }
 
     @Override
@@ -24,10 +30,11 @@ public class FieldSpecValueGeneratorProvider implements Provider<FieldSpecValueG
         if (configSource.getWalkerType() == GenerationConfig.TreeWalkerType.REDUCTIVE) {
             switch (configSource.getCombinationStrategyType()){
                 case PINNING:
-                    throw new UnsupportedOperationException("Pinning isn't supported with the reductive mode yet");
+                    return reductivePinningGenerator;
                 case EXHAUSTIVE:
                     return standardEvaluator;
                 case MINIMAL:
+                    //TODO: Update the documentation if this persists
                     throw new UnsupportedOperationException("Minimal isn't supported with the reductive mode yet");
             }
         }

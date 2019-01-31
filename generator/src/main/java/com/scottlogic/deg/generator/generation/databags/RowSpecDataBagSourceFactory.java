@@ -7,6 +7,8 @@ import com.scottlogic.deg.generator.fieldspecs.ReductiveRowSpec;
 import com.scottlogic.deg.generator.fieldspecs.RowSpec;
 import com.scottlogic.deg.generator.generation.FieldSpecValueGenerator;
 import com.scottlogic.deg.generator.generation.GenerationConfig;
+import com.scottlogic.deg.generator.generation.ReductivePinningCoordinator;
+import com.scottlogic.deg.generator.generation.StandardFieldSpecValueGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +16,18 @@ import java.util.stream.Stream;
 
 public class RowSpecDataBagSourceFactory {
     private final FieldSpecValueGenerator generator;
+    private final StandardFieldSpecValueGenerator standardGenerator;
+    private final ReductivePinningCoordinator pinningCoordinator;
 
     @Inject
-    public RowSpecDataBagSourceFactory(FieldSpecValueGenerator generator) {
+    public RowSpecDataBagSourceFactory(
+        FieldSpecValueGenerator generator,
+        StandardFieldSpecValueGenerator standardGenerator,
+        ReductivePinningCoordinator pinningCoordinator) {
+
         this.generator = generator;
+        this.standardGenerator = standardGenerator;
+        this.pinningCoordinator = pinningCoordinator;
     }
 
     public DataBagSource createDataBagSource(RowSpec rowSpec){
@@ -50,7 +60,7 @@ public class RowSpecDataBagSourceFactory {
 
             fieldDataBagSources.add(
                 new SingleValueDataBagSource(
-                    new StreamDataBagSource(generator.generate(field, fieldSpec))));
+                    new StreamDataBagSource(standardGenerator.generate(field, fieldSpec))));
         }
 
         DataBagSource sourceWithoutLastFixedField = new MultiplexingDataBagSource(fieldDataBagSources.stream());
@@ -81,7 +91,11 @@ public class RowSpecDataBagSourceFactory {
                     DataBag.empty,
                     (prev, current) -> DataBag.merge(prev, current));
 
-            return valuesForLastField.map(lastFieldValue -> DataBag.merge(lastFieldValue, singleValuePerField));
+            return valuesForLastField.map(lastFieldValue -> {
+                DataBag row = DataBag.merge(lastFieldValue, singleValuePerField);
+                pinningCoordinator.rowEmitted(row);
+                return row;
+            });
         }
     }
 

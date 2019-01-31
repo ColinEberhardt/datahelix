@@ -79,6 +79,7 @@ class ExampleProfilesViolationTests {
             File profileFile = Paths.get(dir.getCanonicalPath(), "profile.json").toFile();
 
             DynamicTest test = DynamicTest.dynamicTest(dir.getName(), () -> {
+                StandardFieldSpecValueGenerator generator = new StandardFieldSpecValueGenerator(config, new StandardFieldValueSourceEvaluator());
                 StandardGenerationEngine engine = new StandardGenerationEngine(
                     new DecisionTreeDataGenerator(
                         new CartesianProductDecisionTreeWalker(
@@ -91,7 +92,7 @@ class ExampleProfilesViolationTests {
                         new RelatedFieldTreePartitioner(),
                         new MostProlificConstraintOptimiser(),
                         new NoopDataGeneratorMonitor(),
-                        new RowSpecDataBagSourceFactory(new StandardFieldSpecValueGenerator(config, new StandardFieldValueSourceEvaluator()))),
+                        new RowSpecDataBagSourceFactory(generator, generator, new ReductivePinningCoordinator(new ReductivePinningFieldCache()))),
                     new ProfileDecisionTreeFactory());
                 ViolationGenerationEngine violationGenerationEngine = new ViolationGenerationEngine(null, engine, new ManifestWriter(), Collections.emptyList());
 

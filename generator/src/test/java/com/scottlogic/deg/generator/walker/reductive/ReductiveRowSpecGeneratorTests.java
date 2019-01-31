@@ -60,10 +60,13 @@ class ReductiveRowSpecGeneratorTests {
             GenerationConfig.TreeWalkerType.REDUCTIVE,
             GenerationConfig.CombinationStrategyType.EXHAUSTIVE
         ));
+        StandardFieldSpecValueGenerator generator = new StandardFieldSpecValueGenerator(
+            config,
+            new StandardFieldValueSourceEvaluator());
         RowSpecDataBagSourceFactory dataBagSourceFactory = new RowSpecDataBagSourceFactory(
-            new StandardFieldSpecValueGenerator(
-                config,
-                new StandardFieldValueSourceEvaluator()));
+            generator,
+            generator,
+            new ReductivePinningCoordinator(new ReductivePinningFieldCache()));
 
         Stream<RowSpec> result = rowSpecGenerator.createRowSpecsFromFixedValues(state, rootNode);
         final Stream<List<Object>> fixed = result

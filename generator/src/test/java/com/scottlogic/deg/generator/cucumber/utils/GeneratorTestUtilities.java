@@ -98,12 +98,16 @@ public class GeneratorTestUtilities {
                 walkerType,
                 combinationStrategy));
 
+        StandardFieldSpecValueGenerator generator = new StandardFieldSpecValueGenerator(config, new StandardFieldValueSourceEvaluator());
         final DataGenerator dataGenerator = new DecisionTreeDataGenerator(
             getWalker(config),
             new RelatedFieldTreePartitioner(),
             new NoopDecisionTreeOptimiser(),
             new NoopDataGeneratorMonitor(),
-            new RowSpecDataBagSourceFactory(new StandardFieldSpecValueGenerator(config, new StandardFieldValueSourceEvaluator())));
+            new RowSpecDataBagSourceFactory(
+                generator,
+                generator,
+                new ReductivePinningCoordinator(new ReductivePinningFieldCache())));
 
         final Stream<GeneratedObject> dataSet = dataGenerator.generateData(profile, analysedProfile.getMergedTree(), config);
 
@@ -128,7 +132,8 @@ public class GeneratorTestUtilities {
                     new FixedFieldBuilder(constraintReducer, fixFieldStrategy, monitor, generator),
                     monitor,
                     new ReductiveDecisionTreeReducer(fieldSpecFactory, fieldSpecMerger, new DecisionTreeSimplifier()),
-                    new ReductiveRowSpecGenerator(constraintReducer, fieldSpecMerger, monitor));
+                    new ReductiveRowSpecGenerator(constraintReducer, fieldSpecMerger, monitor),
+                    new ReductivePinningCoordinator(new ReductivePinningFieldCache()));
             default:
             case CARTESIAN_PRODUCT:
                 return new CartesianProductDecisionTreeWalker(
