@@ -2,6 +2,7 @@ Feature: User can specify that a value either matches or contains a specified re
 
 Background:
      Given the generation strategy is full
+      And the walker type is REDUCTIVE
       And there is a field foo
       And foo is of type "string"
 

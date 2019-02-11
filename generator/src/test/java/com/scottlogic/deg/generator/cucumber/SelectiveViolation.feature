@@ -2,6 +2,7 @@ Feature: User can set the generation strategy to violate mode and see test cases
 
 Background:
   Given the generation strategy is interesting
+  And the walker type is REDUCTIVE
   And the combination strategy is exhaustive
   And there is a field foo
   And the data requested is violating
