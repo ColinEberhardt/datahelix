@@ -7,6 +7,7 @@ import com.scottlogic.deg.generator.Profile;
 import com.scottlogic.deg.generator.Rule;
 import com.scottlogic.deg.generator.constraints.*;
 import com.scottlogic.deg.generator.constraints.atomic.AtomicConstraint;
+import com.scottlogic.deg.generator.constraints.atomic.IsOfTypeConstraint;
 import com.scottlogic.deg.generator.constraints.atomic.ViolatedAtomicConstraint;
 import com.scottlogic.deg.generator.constraints.grammatical.*;
 
@@ -18,14 +19,17 @@ public class ProfileDecisionTreeFactory implements DecisionTreeFactory {
     private final DecisionTreeSimplifier decisionTreeSimplifier = new DecisionTreeSimplifier();
 
     private final Boolean implyTypes;
+    ImpliedTypeDictionary dictionary;
 
     @Inject
-    public ProfileDecisionTreeFactory(@Named("implyTypes") Boolean implyTypes){
+    public ProfileDecisionTreeFactory(@Named("implyTypes") Boolean implyTypes, ImpliedTypeDictionary dictionary){
         this.implyTypes = implyTypes;
+        this.dictionary = dictionary;
     }
 
     public ProfileDecisionTreeFactory(){
         this.implyTypes = false;
+        dictionary = new ImpliedTypeDictionary();
     }
 
     private static Collection<Constraint> wrapEach(
@@ -69,9 +73,16 @@ public class ProfileDecisionTreeFactory implements DecisionTreeFactory {
                 ));
     }
 
-    private static Collection<ConstraintNode> asConstraintNodeList(AtomicConstraint constraint) {
+    private Collection<ConstraintNode> asConstraintNodeList(AtomicConstraint constraint) {
 
-        return asConstraintNodeList(Collections.singleton(constraint));
+        if (implyTypes){
+            Optional<IsOfTypeConstraint> impliedTypeConstraint = dictionary.getImpliedTypeConstraint(constraint);
+            if (impliedTypeConstraint.isPresent()) {
+                return asConstraintNodeList(Arrays.asList(constraint, impliedTypeConstraint.get()));
+            }
+        }
+
+        return asConstraintNodeList(Arrays.asList(constraint));
     }
 
     private static Collection<ConstraintNode> asConstraintNodeList(DecisionNode decision) {
