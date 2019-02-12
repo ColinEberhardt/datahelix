@@ -86,6 +86,11 @@ public class CucumberGenerationConfigSource implements GenerationConfigSource {
     }
 
     @Override
+    public boolean visualiseReductions() {
+        return false;
+    }
+
+    @Override
     public boolean implyTypes() {
         return false;
     }

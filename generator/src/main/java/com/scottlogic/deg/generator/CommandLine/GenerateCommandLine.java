@@ -92,6 +92,11 @@ public class GenerateCommandLine extends CommandLineBase {
     private Boolean verbose = false;
 
     @CommandLine.Option(
+        names = {"--visualise-reductions"},
+        description = "Visualise each tree reduction")
+    private Boolean visualiseReductions = false;
+
+    @CommandLine.Option(
         names = {"--dont-imply-types"},
         description = "Turns OFF type implication")
     private Boolean dontImplyTypes = false;
@@ -172,6 +177,11 @@ public class GenerateCommandLine extends CommandLineBase {
     @Override
     public boolean getValidateProfile() {
         return this.validateProfile;
+    }
+
+    @Override
+    public boolean visualiseReductions() {
+        return visualiseReductions;
     }
 
     @Override

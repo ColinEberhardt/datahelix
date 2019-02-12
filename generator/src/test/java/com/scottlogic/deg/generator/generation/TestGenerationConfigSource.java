@@ -99,4 +99,9 @@ public class TestGenerationConfigSource implements GenerationConfigSource {
     public boolean implyTypes() {
         return false;
     }
+
+    @Override
+    public boolean visualiseReductions() {
+        return false;
+    }
 }
