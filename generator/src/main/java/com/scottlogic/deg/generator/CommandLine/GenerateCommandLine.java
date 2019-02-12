@@ -91,6 +91,11 @@ public class GenerateCommandLine extends CommandLineBase {
         description = "Turns ON system out monitoring")
     private Boolean verbose = false;
 
+    @CommandLine.Option(
+        names = {"--dont-imply-types"},
+        description = "Turns OFF type implication")
+    private Boolean dontImplyTypes = false;
+
     @Override
     public boolean shouldDoPartitioning() {
         return !this.dontPartitionTrees;
@@ -109,6 +114,11 @@ public class GenerateCommandLine extends CommandLineBase {
     @Override
     public boolean shouldViolate() {
         return this.violateProfile;
+    }
+
+    @Override
+    public boolean implyTypes() {
+        return !dontImplyTypes;
     }
 
     @Override

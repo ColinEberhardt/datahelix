@@ -84,4 +84,9 @@ public class CucumberGenerationConfigSource implements GenerationConfigSource {
     public boolean shouldViolate() {
         return state.shouldViolate;
     }
+
+    @Override
+    public boolean implyTypes() {
+        return false;
+    }
 }

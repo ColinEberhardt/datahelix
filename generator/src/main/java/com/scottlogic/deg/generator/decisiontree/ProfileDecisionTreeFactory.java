@@ -1,5 +1,7 @@
 package com.scottlogic.deg.generator.decisiontree;
 
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import com.scottlogic.deg.generator.FlatMappingSpliterator;
 import com.scottlogic.deg.generator.Profile;
 import com.scottlogic.deg.generator.Rule;
@@ -14,6 +16,17 @@ import java.util.stream.Collectors;
 
 public class ProfileDecisionTreeFactory implements DecisionTreeFactory {
     private final DecisionTreeSimplifier decisionTreeSimplifier = new DecisionTreeSimplifier();
+
+    private final Boolean implyTypes;
+
+    @Inject
+    public ProfileDecisionTreeFactory(@Named("implyTypes") Boolean implyTypes){
+        this.implyTypes = implyTypes;
+    }
+
+    public ProfileDecisionTreeFactory(){
+        this.implyTypes = false;
+    }
 
     private static Collection<Constraint> wrapEach(
         Collection<Constraint> constraints,

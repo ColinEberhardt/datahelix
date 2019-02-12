@@ -20,4 +20,9 @@ public abstract class CommandLineBase implements Runnable, GenerationConfigSourc
     }
 
     protected abstract Class<? extends Runnable> getExecutorType();
+
+    @Override
+    public boolean implyTypes() {
+        return false;
+    }
 }

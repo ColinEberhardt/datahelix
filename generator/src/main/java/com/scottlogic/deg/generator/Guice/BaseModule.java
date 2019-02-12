@@ -77,6 +77,7 @@ public class BaseModule extends AbstractModule {
         bind(DecisionTreeWalker.class).annotatedWith(Names.named("routed")).to(DecisionTreeRoutesTreeWalker.class);
 
         bind(Path.class).annotatedWith(Names.named("outputPath")).toProvider(OutputPathProvider.class);
+        bind(Boolean.class).annotatedWith(Names.named("implyTypes")).toProvider(ImplyTypesProvider.class);
 
         bind(VelocityMonitor.class).in(Singleton.class);
     }
