@@ -4,17 +4,18 @@ import com.scottlogic.deg.generator.Field;
 import com.scottlogic.deg.generator.FlatMappingSpliterator;
 import com.scottlogic.deg.generator.Profile;
 import com.scottlogic.deg.generator.constraints.Constraint;
+import com.scottlogic.deg.generator.constraints.atomic.AtomicConstraint;
 import com.scottlogic.deg.generator.constraints.atomic.IsInSetConstraint;
+import com.scottlogic.deg.generator.decisiontree.DecisionTree;
+import com.scottlogic.deg.generator.decisiontree.visualisation.BaseVisitor;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Stream;
 
 final class SetBasedFixFieldStrategy extends ProfileBasedFixFieldStrategy {
 
-    SetBasedFixFieldStrategy(Profile profile) {
-        super(profile);
+    SetBasedFixFieldStrategy(DecisionTree tree) {
+        super(tree);
     }
 
     Comparator<Field> getFieldOrderingStrategy() {
@@ -39,8 +40,7 @@ final class SetBasedFixFieldStrategy extends ProfileBasedFixFieldStrategy {
             .size();
     }
 
-    private Stream<Constraint> constraintsFromProfile(){
-        return FlatMappingSpliterator.flatMap(profile.rules.stream(), rule -> rule.constraints.stream());
+    private Stream<AtomicConstraint> constraintsFromProfile(){
+        return AtomicConstraintCollector.getAllAtomicConstraints(tree).stream();
     }
-
 }

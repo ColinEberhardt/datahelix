@@ -24,6 +24,6 @@ public class FixFieldStrategyFactory {
             return null;
         }
 
-        return new HierarchicalDependencyFixFieldStrategy(profile, analyser);
+        return new HierarchicalDependencyFixFieldStrategy(profile, analyser, tree);
     }
 }

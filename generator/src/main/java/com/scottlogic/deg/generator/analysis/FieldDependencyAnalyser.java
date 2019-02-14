@@ -5,6 +5,8 @@ import com.scottlogic.deg.generator.FlatMappingSpliterator;
 import com.scottlogic.deg.generator.Profile;
 import com.scottlogic.deg.generator.constraints.grammatical.ConditionalConstraint;
 import com.scottlogic.deg.generator.constraints.Constraint;
+import com.scottlogic.deg.generator.decisiontree.DecisionTree;
+import com.scottlogic.deg.generator.walker.reductive.field_selection_strategy.AtomicConstraintCollector;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -12,8 +14,8 @@ import java.util.stream.Stream;
 
 public class FieldDependencyAnalyser {
 
-    public FieldDependencyAnalysisResult analyse(Profile profile) {
-        List<FieldDependencyNode> graph = getFieldDependencyGraph(profile);
+    public FieldDependencyAnalysisResult analyse(Profile profile, DecisionTree tree) {
+        List<FieldDependencyNode> graph = getFieldDependencyGraph(profile, tree);
         Map<Field, Collection<FieldDependency>> dependants = graph.stream()
             .collect(Collectors.toMap(fdn -> fdn.field, this::getAllDependentFields));
         Map<Field, Collection<FieldDependency>> influencers = graph.stream()
@@ -21,13 +23,13 @@ public class FieldDependencyAnalyser {
         return new FieldDependencyAnalysisResult(influencers, dependants);
     }
 
-    private List<FieldDependencyNode> getFieldDependencyGraph(Profile profile){
+    private List<FieldDependencyNode> getFieldDependencyGraph(Profile profile, DecisionTree tree){
         Map<Field, Set<Field>> dependencyMapping = new HashMap<>();
 
         // First make a map of all fields to their directly dependent fields
-        profile.fields.forEach(field -> {
+        tree.fields.forEach(field -> {
             dependencyMapping.putIfAbsent(field, new HashSet<>());
-            findFieldInPredicate(profile, field).forEach(cc -> {
+            findFieldInPredicate(profile, tree, field).forEach(cc -> {
                 dependencyMapping.get(field).addAll(cc.whenConditionIsTrue.getFields());
                 if (cc.whenConditionIsFalse != null) {
                     dependencyMapping.get(field).addAll(cc.whenConditionIsFalse.getFields());
@@ -103,18 +105,19 @@ public class FieldDependencyAnalyser {
             });
     }
 
-    private Stream<Constraint> constraintsFromProfile(Profile profile){
+    private Stream<Constraint> constraintsFromProfile(Profile profile, DecisionTree tree){
+        //this method needs to return the original constraints, i.e. before they were turned into nodes in the tree
         return FlatMappingSpliterator.flatMap(profile.rules.stream(), rule -> rule.constraints.stream());
     }
 
-    private Stream<ConditionalConstraint> conditionalConstraintsFromProfile(Profile profile){
-        return constraintsFromProfile(profile)
+    private Stream<ConditionalConstraint> conditionalConstraintsFromProfile(Profile profile, DecisionTree tree){
+        return constraintsFromProfile(profile, tree)
             .filter(constraint -> constraint instanceof ConditionalConstraint)
             .map(constraint -> (ConditionalConstraint) constraint);
     }
 
-    private Stream<ConditionalConstraint> findFieldInPredicate(Profile profile, Field field){
-        return conditionalConstraintsFromProfile(profile)
+    private Stream<ConditionalConstraint> findFieldInPredicate(Profile profile, DecisionTree tree, Field field){
+        return conditionalConstraintsFromProfile(profile, tree)
             .filter(constraint -> constraint.condition.getFields().contains(field));
     }
 
