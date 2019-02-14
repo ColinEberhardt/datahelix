@@ -46,7 +46,9 @@ public class DecisionTreeToRowSpecsTests {
     @Test
     public void test() {
         final DecisionTreeCollection dTree = dTreeGenerator.analyse(makeProfile());
-        final List<RowSpec> rowSpecs = dTreeWalker.walk(new DecisionTree(reduceRules(dTree), dTree.getFields(), "DecisionTreeToRowSpecsTests"))
+        final List<RowSpec> rowSpecs = dTreeWalker.walk(
+            new DecisionTree(reduceRules(dTree), dTree.getFields(), "DecisionTreeToRowSpecsTests"),
+            null)
                 .collect(Collectors.toList());
         Assert.assertThat(rowSpecs, Is.is(IsNull.notNullValue()));
     }

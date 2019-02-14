@@ -100,7 +100,7 @@ class CartesianProductDecisionTreeWalkerTests {
         DecisionTree merged = analysedProfile.getMergedTree();
 
         final List<RowSpec> rowSpecs = dTreeWalker
-            .walk(merged)
+            .walk(merged, null)
             .collect(Collectors.toList());
 
         Assert.assertThat(rowSpecs, notNullValue());

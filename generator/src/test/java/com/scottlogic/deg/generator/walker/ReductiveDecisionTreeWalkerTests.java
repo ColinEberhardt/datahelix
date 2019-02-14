@@ -9,6 +9,7 @@ import com.scottlogic.deg.generator.fieldspecs.FieldSpec;
 import com.scottlogic.deg.generator.fieldspecs.RowSpec;
 import com.scottlogic.deg.generator.generation.NoopDataGeneratorMonitor;
 import com.scottlogic.deg.generator.walker.reductive.*;
+import com.scottlogic.deg.generator.walker.reductive.field_selection_strategy.FixFieldStrategy;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -35,6 +36,7 @@ class ReductiveDecisionTreeWalkerTests {
         FixedFieldBuilder fixedFieldBuilder = mock(FixedFieldBuilder.class);
         ReductiveDecisionTreeReducer treeReducer = mock(ReductiveDecisionTreeReducer.class);
         ReductiveRowSpecGenerator rowSpecGenerator = mock(ReductiveRowSpecGenerator.class);
+        FixFieldStrategy fixFieldStrategy = mock(FixFieldStrategy.class);
         ReductiveDecisionTreeWalker walker = new ReductiveDecisionTreeWalker(
             new NoOpIterationVisualiser(),
             fixedFieldBuilder,
@@ -43,11 +45,11 @@ class ReductiveDecisionTreeWalkerTests {
             rowSpecGenerator
         );
         when(treeReducer.reduce(eq(rootNode), any(ReductiveState.class))).thenReturn(rootNode);
-        when(fixedFieldBuilder.findNextFixedField(any(ReductiveState.class), eq(rootNode))).thenReturn(null);
+        when(fixedFieldBuilder.findNextFixedField(any(ReductiveState.class), eq(rootNode), eq(fixFieldStrategy))).thenReturn(null);
 
-        List<RowSpec> result = walker.walk(tree).collect(Collectors.toList());
+        List<RowSpec> result = walker.walk(tree, fixFieldStrategy).collect(Collectors.toList());
 
-        verify(fixedFieldBuilder).findNextFixedField(any(ReductiveState.class), eq(rootNode));
+        verify(fixedFieldBuilder).findNextFixedField(any(ReductiveState.class), eq(rootNode), eq(fixFieldStrategy));
         Assert.assertThat(result, empty());
     }
 
@@ -63,6 +65,7 @@ class ReductiveDecisionTreeWalkerTests {
         FixedFieldBuilder fixedFieldBuilder = mock(FixedFieldBuilder.class);
         ReductiveDecisionTreeReducer treeReducer = mock(ReductiveDecisionTreeReducer.class);
         ReductiveRowSpecGenerator rowSpecGenerator = mock(ReductiveRowSpecGenerator.class);
+        FixFieldStrategy fixFieldStrategy = mock(FixFieldStrategy.class);
         ReductiveDecisionTreeWalker walker = new ReductiveDecisionTreeWalker(
             new NoOpIterationVisualiser(),
             fixedFieldBuilder,
@@ -72,11 +75,11 @@ class ReductiveDecisionTreeWalkerTests {
         );
         FixedField firstFixedField = fixedField(123);
         when(treeReducer.reduce(eq(rootNode), any(ReductiveState.class))).thenReturn(rootNode);
-        when(fixedFieldBuilder.findNextFixedField(any(ReductiveState.class), eq(rootNode))).thenReturn(firstFixedField, null);
+        when(fixedFieldBuilder.findNextFixedField(any(ReductiveState.class), eq(rootNode), eq(fixFieldStrategy))).thenReturn(firstFixedField, null);
 
-        List<RowSpec> result = walker.walk(tree).collect(Collectors.toList());
+        List<RowSpec> result = walker.walk(tree, fixFieldStrategy).collect(Collectors.toList());
 
-        verify(fixedFieldBuilder, times(2)).findNextFixedField(any(ReductiveState.class), eq(rootNode));
+        verify(fixedFieldBuilder, times(2)).findNextFixedField(any(ReductiveState.class), eq(rootNode), eq(fixFieldStrategy));
         Assert.assertThat(result, empty());
     }
 

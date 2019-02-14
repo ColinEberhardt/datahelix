@@ -35,7 +35,7 @@ class DecisionTreeRoutesTreeWalkerTest {
             routeProducer);
         DecisionTree tree = new DecisionTree(new TreeConstraintNode(), getFields(), "Test tree");
 
-        walker.walk(tree);
+        walker.walk(tree, null);
 
         Assert.assertSame(routeProducer.actualDecisionTree, tree);
     }
@@ -67,7 +67,7 @@ class DecisionTreeRoutesTreeWalkerTest {
             rowSpecMerger,
             routeProducer);
 
-        Stream<RowSpec> routes = walker.walk(tree);
+        Stream<RowSpec> routes = walker.walk(tree, null);
 
         List<RowSpec> routesList = routes.collect(Collectors.toList());
         Assert.assertEquals(routesList.size(), 1);
@@ -105,7 +105,7 @@ class DecisionTreeRoutesTreeWalkerTest {
             rowSpecMerger,
             routeProducer);
 
-        Stream<RowSpec> routes = walker.walk(tree);
+        Stream<RowSpec> routes = walker.walk(tree, null);
 
         List<RowSpec> routesList = routes.collect(Collectors.toList());
         Assert.assertEquals(routesList.get(0).toString(), "right decision<left decision<root");
@@ -142,7 +142,7 @@ class DecisionTreeRoutesTreeWalkerTest {
             rowSpecMerger,
             routeProducer);
 
-        Stream<RowSpec> routes = walker.walk(tree);
+        Stream<RowSpec> routes = walker.walk(tree, null);
 
         List<RowSpec> routesList = routes.collect(Collectors.toList());
         Assert.assertEquals(routesList.size(), 0);
@@ -179,7 +179,7 @@ class DecisionTreeRoutesTreeWalkerTest {
             rowSpecMerger,
             routeProducer);
 
-        Stream<RowSpec> routes = walker.walk(tree);
+        Stream<RowSpec> routes = walker.walk(tree, null);
 
         List<RowSpec> routesList = routes.collect(Collectors.toList());
         Assert.assertEquals(routesList.size(), 2);
@@ -216,7 +216,7 @@ class DecisionTreeRoutesTreeWalkerTest {
             rowSpecMerger,
             routeProducer);
 
-        Stream<RowSpec> routes = walker.walk(tree);
+        Stream<RowSpec> routes = walker.walk(tree, null);
 
         List<RowSpec> routesList = routes.collect(Collectors.toList());
         Assert.assertEquals(routesList.size(), 1);
