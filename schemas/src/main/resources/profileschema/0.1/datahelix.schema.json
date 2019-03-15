@@ -5,15 +5,18 @@
     "schemaVersion": {
       "type": "string",
       "title": "The version of the DataHelix profile schema",
-      "pattern": "^[0-9]+.[0-9]+$"
+      "pattern": "^[0-9]+[.][0-9]+$"
     },
     "temporal": {
       "type": "object",
+      "additionalProperties": false,
+      "required": ["date"],
       "properties": {
         "additionalProperties": false,
         "date": {
           "type": "string",
-          "pattern": "^[0-9]{4}-[0-1][0-9]-([0-2][0-9]|3[01])T([0-1][0-9]|2[03]):[0-5][0-9]:[0-5][0-9].[0-9]{3}$"
+          "title": "an ISO 8610 compatible string denoting a date and time",
+          "pattern": "^(?!0000)[0-9]{4}-([0][0-9]|[1][0-2])-([0-2][0-9]|3[01])T([0-1][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9][.][0-9]{3}$"
         }
       }
     },
@@ -25,6 +28,16 @@
       "properties": {
         "name": {"type": "string"}
       }
+    },
+    "constraint": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/grammaticalConstraint"
+        },
+        {
+          "$ref": "#/definitions/dataConstraint"
+        }
+      ]
     },
     "grammaticalConstraint": {
       "oneOf": [
@@ -45,6 +58,7 @@
     "dataConstraint": {
       "type": "object",
       "additionalProperties": false,
+      "required": ["field", "is"],
       "properties": {
         "field": {"type": "string"},
         "is": {
@@ -52,11 +66,28 @@
             "ofType", "equalTo", "aValid", "inSet",
             "formattedAs", "matchingRegex", "containingRegex", "ofLength", "longerThan", "shorterThan",
             "null",
-            "greaterThan", "lessThan", "greaterThanOrEqualTo", "lessThanOrEqualTo", "granularTo"
+            "greaterThan", "lessThan", "greaterThanOrEqualTo", "lessThanOrEqualTo", "granularTo",
+            "after", "afterOrAt", "before", "beforeOrAt"
           ]
         }
       },
       "anyOf": [
+        {
+          "if": {
+            "properties": {"is": {"enum": ["after", "afterOrAt", "before", "beforeOrAt"]}}
+          },
+          "then": {
+            "properties": {"value": {"$ref": "#/definitions/temporal"}}
+          }
+        },
+        {
+          "if": {
+            "properties": {"is": {"const": "equalTo"}}
+          },
+          "then": {
+            "properties": {"value": {}}
+          }
+        },
         {
           "if": {
             "properties": {"is": {"const": "ofType"}}
@@ -70,7 +101,7 @@
             "properties": {"is": {"const": "inSet"}}
           },
           "then": {
-            "properties": {"values": {"type": "array"}}
+            "properties": {"values": {"type": "array", "minItems": 2}}
           }
         },
         {
@@ -114,45 +145,15 @@
             "properties": {"is": {"const": "aValid"}}
           },
           "then": {
-            "properties": {"value": {"pattern": "^ISIN$"}}
+            "properties": {"value": {"const": "ISIN"}}
           }
         }
       ]
     },
-    "constraint": {
-      "type": "array",
-      "minItems": 1,
-      "additionalItems": false,
-      "title": "The constraints defining the enclosing rule.",
-      "items": {
-        "oneOf": [
-          {
-            "$ref": "#/definitions/grammaticalConstraint"
-          },
-          {
-            "$ref": "#/definitions/dataConstraint"
-          }
-        ]
-      }
-    },
-    "ofTypeConstraint": {
-      "type": "object",
-      "properties": {
-        "additionalProperties": false,
-        "ofType": {
-          "type": "string",
-          "enum": [
-            "integer",
-            "decimal",
-            "string",
-            "temporal"
-          ]
-        }
-      }
-    },
     "notConstraint": {
       "type": "object",
       "additionalProperties": false,
+      "required": ["not"],
       "properties": {
         "not": {"$ref": "#/definitions/constraint"}
       }
@@ -164,6 +165,7 @@
       "properties": {
         "anyOf": {
           "type": "array",
+          "minItems": 2,
           "items": {
             "$ref": "#/definitions/constraint"
           }
@@ -177,6 +179,7 @@
       "properties": {
         "allOf": {
           "type": "array",
+          "minItems": 2,
           "items": {
             "$ref": "#/definitions/constraint"
           }
@@ -185,24 +188,24 @@
     },
     "ifConstraint": {
       "type": "object",
-      "additionalProperties": false,
       "required": ["if", "then"],
       "properties": {
         "if": {
-          "type": "object"
+          "$ref": "#/definitions/constraint"
         },
         "then": {
-          "type": "object"
+          "$ref": "#/definitions/constraint"
         },
         "else": {
-          "type": "object"
+          "$ref": "#/definitions/constraint"
         }
       }
     }
   },
   "type": "object",
-  "title": "The Scott Logic DataHelix Profile Schema",
+  "additionalProperties": false,
   "required": ["schemaVersion", "fields", "rules"],
+  "title": "The Scott Logic DataHelix Profile Schema",
   "properties": {
     "additionalProperties": false,
     "schemaVersion": {
@@ -229,16 +232,18 @@
       "title": "The Rules defining the data to be output",
       "items": {
         "type": "object",
-        "title": "A set of Rule objects.",
+        "additionalProperties": false,
         "required": ["constraints"],
+        "title": "A set of Rule objects.",
         "properties": {
-          "additionalProperties": false,
           "rule": {
             "type": "string",
-            "title": "A named collection of constraints. Test case generation revolves around rules, in that the generator will output a separate dataset for each rule, wherein each row violates the rule in a different way."
+            "title": "A collection of constraints. Test case generation revolves around rules, in that the generator will output a separate dataset for each rule, wherein each row violates the rule in a different way."
           },
           "constraints": {
-            "$ref": "#/definitions/constraint"
+            "type": "array",
+            "minItems": 1,
+            "items": {"$ref": "#/definitions/constraint"}
           }
         }
       }
