@@ -1,6 +1,53 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "http://scottlogic.com/datahelix.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "fields", "rules"],
+  "title": "The Scott Logic DataHelix Profile Schema",
+  "properties": {
+    "additionalProperties": false,
+    "schemaVersion": {
+      "$ref": "#/definitions/schemaVersion"
+    },
+    "description": {
+      "type": "string",
+      "title": "A description of what data the profile is modelling"
+    },
+    "fields": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "additionalItems": false,
+      "title": "Defines the fields that data will be produced for. field names must begin with an alphabetic character.",
+      "items": {
+        "$ref": "#/definitions/fieldName"
+      }
+    },
+    "rules": {
+      "type": "array",
+      "minItems": 1,
+      "additionalItems": false,
+      "title": "The Rules defining the data to be output",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["constraints"],
+        "title": "A set of Rule objects.",
+        "properties": {
+          "rule": {
+            "type": "string",
+            "title": "A collection of constraints. Test case generation revolves around rules, in that the generator will output a separate dataset for each rule, wherein each row violates the rule in a different way."
+          },
+          "constraints": {
+            "type": "array",
+            "minItems": 1,
+            "items": {"$ref": "#/definitions/constraint"}
+          }
+        }
+      }
+    }
+  },
   "definitions": {
     "schemaVersion": {
       "type": "string",
@@ -188,6 +235,9 @@
     },
     "ifConstraint": {
       "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ifElseConstraint"
+      },
       "required": ["if", "then"],
       "properties": {
         "if": {
@@ -195,56 +245,16 @@
         },
         "then": {
           "$ref": "#/definitions/constraint"
-        },
-        "else": {
-          "$ref": "#/definitions/constraint"
         }
       }
-    }
-  },
-  "type": "object",
-  "additionalProperties": false,
-  "required": ["schemaVersion", "fields", "rules"],
-  "title": "The Scott Logic DataHelix Profile Schema",
-  "properties": {
-    "additionalProperties": false,
-    "schemaVersion": {
-      "$ref": "#/definitions/schemaVersion"
     },
-    "description": {
-      "type": "string",
-      "title": "A description of what data the profile is modelling"
-    },
-    "fields": {
-      "type": "array",
-      "minItems": 1,
-      "uniqueItems": true,
-      "additionalItems": false,
-      "title": "Defines the fields that data will be produced for. field names must begin with an alphabetic character.",
-      "items": {
-        "$ref": "#/definitions/fieldName"
-      }
-    },
-    "rules": {
-      "type": "array",
-      "minItems": 1,
-      "additionalItems": false,
-      "title": "The Rules defining the data to be output",
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": ["constraints"],
-        "title": "A set of Rule objects.",
-        "properties": {
-          "rule": {
-            "type": "string",
-            "title": "A collection of constraints. Test case generation revolves around rules, in that the generator will output a separate dataset for each rule, wherein each row violates the rule in a different way."
-          },
-          "constraints": {
-            "type": "array",
-            "minItems": 1,
-            "items": {"$ref": "#/definitions/constraint"}
-          }
+    "ifElseConstraint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["else"],
+      "properties": {
+        "else": {
+          "$ref": "#/definitions/constraint"
         }
       }
     }

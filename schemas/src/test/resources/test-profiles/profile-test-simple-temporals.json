@@ -7,7 +7,7 @@
         {
           "field": "field1",
           "is": "after",
-          "value":{"date": "2000-01-01T09:00:00.000"}
+          "value": {"date": "2000-01-01T09:00:00.000"}
         },
         {
           "field": "field1",
@@ -22,7 +22,47 @@
         {
           "field": "field1",
           "is": "beforeOrAt",
-          "value":{"date": "0001-01-01T09:00:00.000"}
+          "value": {"date": "0001-01-01T09:00:00.000"}
+        },
+        {
+          "field": "field1",
+          "is": "equalTo",
+          "value": {"date": "0001-01-01T09:00:00.000"}
+        },
+        {
+          "not": {
+            "field": "field1",
+            "is": "after",
+            "value": {"date": "2000-01-01T09:00:00.000"}
+          }
+        },
+        {
+          "not": {
+            "field": "field1",
+            "is": "afterOrAt",
+            "value": {"date": "2000-01-01T09:00:00.000"}
+          }
+        },
+        {
+          "not": {
+            "field": "field1",
+            "is": "before",
+            "value": {"date": "2000-01-01T09:00:00.000"}
+          }
+        },
+        {
+          "not": {
+            "field": "field1",
+            "is": "beforeOrAt",
+            "value": {"date": "0001-01-01T09:00:00.000"}
+          }
+        },
+        {
+          "not": {
+            "field": "field1",
+            "is": "equalTo",
+            "value": {"date": "0001-01-01T09:00:00.000"}
+          }
         }
       ]
     }
