@@ -235,9 +235,7 @@
     },
     "ifConstraint": {
       "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/ifElseConstraint"
-      },
+      "additionalProperties": false,
       "required": ["if", "then"],
       "properties": {
         "if": {
@@ -245,14 +243,7 @@
         },
         "then": {
           "$ref": "#/definitions/constraint"
-        }
-      }
-    },
-    "ifElseConstraint": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["else"],
-      "properties": {
+        },
         "else": {
           "$ref": "#/definitions/constraint"
         }
